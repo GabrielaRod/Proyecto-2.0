@@ -1,17 +1,15 @@
 require('./bootstrap');
-require('livewire-vue');
-
-import Vue from 'vue';
-import 'livewire-vue';
 
 import Alpine from 'alpinejs';
 import axios from 'axios';
 import * as VueGoogleMaps from 'vue2-google-maps';
 
-window.Vue = require('vue').default;
 window.Alpine = Alpine;
 
 Alpine.start();
+
+window.Vue = require('vue').default;
+
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
@@ -23,7 +21,6 @@ Vue.use(VueGoogleMaps, {
 
 const app = new Vue({
     el: '#app',
-
     data() {  //Hold Data as an Array of [Latitude, Longitud]
         return {
             coordinates: [],

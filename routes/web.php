@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AntennaController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/map', [PageController::class, 'markers']); 
 
 Route::resource('antennas', AntennaController::class);
+
+/* Route::group(['middleware', 'auth'])->get('/dashboard', function () {
+    Route::resource('antennas', AntennaController::class);
+    Route::resource('users', UserController::class);
+}); */

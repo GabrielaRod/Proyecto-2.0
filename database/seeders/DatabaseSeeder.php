@@ -15,10 +15,14 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            //VehiclesTableSeeder::class,
-            //TagsTableSeeder::class,
-            //CoordinatesTableSeeder::class,
-            AntennasTableSeeder::class,         
+            VehiclesTableSeeder::class,
+            TagsTableSeeder::class,
+            CoordinatesTableSeeder::class,
+            AntennasTableSeeder::class,   
+            PermissionsTableSeeder::class,
+            RolesTableSeeder::class,
+            PermissionRoleTableSeeder::class,
+            RoleUserTableSeeder::class,
         ]);
     }
 }

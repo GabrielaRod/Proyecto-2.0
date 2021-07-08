@@ -8,7 +8,7 @@
     <div>
         <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="block mb-8">
-                <a href="{{ route('antennas.create') }}" class="bg-green-500 bg-opacity-75 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Antenna</a>
+                <a href="{{ route('antennas.create') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Add Antenna</a>
             </div>
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -17,17 +17,8 @@
                             <table class="min-w-full divide-y divide-gray-200 w-full">
                                 <thead>
                                 <tr>
-                                    <th scope="col" width="50" class="px-6 py-3 bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
-                                        ID
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
-                                        Mac Address
-                                    </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                                         Location
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
-                                        Status
                                     </th>
                                     <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
                                         Actions
@@ -38,22 +29,9 @@
                                 @foreach ($antennas as $antenna)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
-                                            {{ $antenna->id }}
-                                        </td>
-
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
-                                            {{ $antenna->MacAddress }}
-                                        </td>
-
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
                                             {{ $antenna->Location }}
                                         </td>
-
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
-                                            {{ $antenna->Status }}
-                                        </td>
-
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <td class="px-6 py-3 whitespace-nowrap text-sm font-medium">
                                             <a href="{{ route('antennas.show', $antenna->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
                                             <a href="{{ route('antennas.edit', $antenna->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
                                             <form class="inline-block" action="{{ route('antennas.destroy', $antenna->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">

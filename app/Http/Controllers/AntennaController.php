@@ -18,7 +18,7 @@ class AntennaController extends Controller
      */
     public function index()
     {
-        //abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $antennas = Antenna::all();
 
@@ -32,7 +32,7 @@ class AntennaController extends Controller
      */
     public function create()
     {
-        //abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('antennas.create');
     }
@@ -58,7 +58,7 @@ class AntennaController extends Controller
      */
     public function show(Antenna $antenna)
     {
-        //abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('antennas.show', compact('antenna'));
     }
@@ -71,7 +71,7 @@ class AntennaController extends Controller
      */
     public function edit(Antenna $antenna)
     {
-        //abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('antennas.edit', compact('antenna'));
     }
@@ -98,7 +98,7 @@ class AntennaController extends Controller
      */
     public function destroy(Antenna $antenna)
     {
-        //abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $antenna->delete();
 

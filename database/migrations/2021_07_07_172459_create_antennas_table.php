@@ -20,6 +20,7 @@ class CreateAntennasTable extends Migration
             $table->unsignedBigInteger('coordinate_id');
             $table->enum('Status', ['ACTIVE','INACTIVE'])->default('ACTIVE');         
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('coordinate_id')->references('id')->on('coordinates')
                 ->onDelete('cascade')

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AntennaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/map', [PageController::class, 'markers']); //Everytime I make a request to /map it calls the method 'markers'
+/**
+ * Everytime I make a request to /map it calls the method 'markers' which retrieves de Latitude and Longitude for the location of the Antennas
+ * Only showing the ones marked as Active
+ */
+
+Route::get('/map', [PageController::class, 'markers']); 
+
+Route::resource('antennas', AntennaController::class);

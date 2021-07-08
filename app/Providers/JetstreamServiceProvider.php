@@ -60,8 +60,9 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Jetstream::role('editor', __('Editor'), [
             'read',
-            'create',
-            'update',
-        ])->description(__('Editor users have the ability to read, create, and update.'));
+            //'create',
+            //'update',
+        //])->description(__('Editor users have the ability to read, create, and update.'));
+        ])->description(__('Editor users have the ability to read'));
     }
 }

@@ -12,8 +12,29 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <!-- Dashboard -->
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-jet-nav-link>
+
+                    <!-- Antennas -->
+                    <x-jet-nav-link href="{{ route('antennas.index') }}" :active="request()->routeIs('antennas.index')">
+                        {{ __('Antennas') }}
+                    </x-jet-nav-link>
+
+                    <!-- Vehicles -->
+                    <x-jet-nav-link :active="request()->routeIs('vehicles')" href="">
+                        Vehicles
+                    </x-jet-nav-link>
+
+                    <!-- Live Feed of the Antennas Scanning -->
+                    <x-jet-nav-link :active="request()->routeIs('livefeed')" href="">
+                        Live Feed
+                    </x-jet-nav-link>
+
+                    <!-- Reports -->
+                    <x-jet-nav-link :active="request()->routeIs('reports')" href="">
+                        Reports
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -138,8 +159,29 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            <!-- Dashboard -->
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-jet-responsive-nav-link>
+
+            <!-- Antennas -->
+            <x-jet-responsive-nav-link href="" :active="request()->routeIs('antennas')">
+                Antennas
+            </x-jet-responsive-nav-link>
+
+            <!-- Vehicles -->
+            <x-jet-responsive-nav-link :active="request()->routeIs('vehicles')" href="">
+                Vehicles
+            </x-jet-responsive-nav-link>
+
+            <!-- Live Feed of the Antennas Scanning -->
+            <x-jet-responsive-nav-link :active="request()->routeIs('livefeed')" href="">
+                Live Feed
+            </x-jet-responsive-nav-link>
+
+            <!-- Reports -->
+            <x-jet-responsive-nav-link :active="request()->routeIs('reports')" href="">
+                Reports
             </x-jet-responsive-nav-link>
         </div>
 

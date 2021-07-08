@@ -29,4 +29,5 @@ class PageController extends Controller
 
         return $markers;
     }
+
 }

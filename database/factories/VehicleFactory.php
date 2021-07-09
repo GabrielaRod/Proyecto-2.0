@@ -30,13 +30,13 @@ class VehicleFactory extends Factory
         $type = $this->faker->randomElement($array = array ('Car', 'SUV'));
     
         return [
-            'user_id' => rand(1,5),
             'VIN' => $vin,
             'Make' => $make,
             'Model' => $model,
             'Year' => $year,
             'Color' => $color,
             'Type' => $type,
+            'Status' => 'Active',
         ];
     }
 }

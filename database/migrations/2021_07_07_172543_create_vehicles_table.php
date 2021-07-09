@@ -21,12 +21,8 @@ class CreateVehiclesTable extends Migration
             $table->integer('Year');
             $table->string('Color');
             $table->string('Type');
-            $table->unsignedBigInteger('user_id');
+            $table->enum('Status', ['ACTIVE','INACTIVE'])->default('ACTIVE'); 
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
 

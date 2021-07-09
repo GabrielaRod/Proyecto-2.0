@@ -28,8 +28,8 @@
                     </x-jet-nav-link>
 
                     <!-- Vehicles -->
-                    <x-jet-nav-link :active="request()->routeIs('vehicles')" href="">
-                        Vehicles
+                    <x-jet-nav-link href="{{ route('vehicles.index') }}" :active="request()->routeIs('vehicles.index')">
+                        {{ __('Vehicles') }}
                     </x-jet-nav-link>
 
                     <!-- Live Feed of the Antennas Scanning -->

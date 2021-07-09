@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AntennaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VehicleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::resource('antennas', AntennaController::class);
 Route::resource('users', UserController::class);
+Route::resource('vehicles', VehicleController::class);
 
 /*
 Route::resource('antennas', AntennaController::class);

@@ -12,15 +12,15 @@ class Vehicle extends Model
     /**
      * Get the user that owns the vehicle.
      */
-    public function user()
+    public function appusers()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(AppUser::class);
     }
 
      /**
      * The tag that belongs to the vehicle.
      */
-    public function tag()
+    public function tags()
     {
         return $this->hasOne(Tag::class, 'Tag');
     }

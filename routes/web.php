@@ -21,8 +21,15 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard');        
 })->name('dashboard');
+
+Route::resource('antennas', AntennaController::class);
+Route::resource('users', UserController::class);
+
+/*
+Route::resource('antennas', AntennaController::class);
+Route::resource('users', UserController::class);*/
 
 /**
  * Everytime I make a request to /map it calls the method 'markers' which retrieves de Latitude and Longitude for the location of the Antennas
@@ -30,10 +37,3 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
  */
 
 Route::get('/map', [PageController::class, 'markers']); 
-
-Route::resource('antennas', AntennaController::class);
-
-/* Route::group(['middleware', 'auth'])->get('/dashboard', function () {
-    Route::resource('antennas', AntennaController::class);
-    Route::resource('users', UserController::class);
-}); */

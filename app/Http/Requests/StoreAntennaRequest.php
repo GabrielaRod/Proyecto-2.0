@@ -10,9 +10,25 @@ class StoreAntennaRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => [
-                'required', 'string',
-            ]
+            'MacAddress'=> [
+                'string',
+                'required',
+            ],
+            'Location'=> [
+                'required',
+                'unique:antennas',
+            ],
+            'coordinate_id.*'=> [                
+                'integer',
+            ],
+            'coordinate_id'=> [
+                'required',
+                'array',
+            ],
+            'Status'=> [
+                'string',
+                'required',
+            ],
         ];
     }
 

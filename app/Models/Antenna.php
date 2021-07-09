@@ -15,11 +15,18 @@ class Antenna extends Model
         'description'
     ];
     
-    /**
-     * Get the antena associated with the coordinates.
-     */
-    public function coordinate()
+    public function __construct(array $attributes = [])
     {
-        return $this->hasOne('App\Antenna');
+        parent::__construct($attributes);
+        self::created(function (Antenna $antenna) {
+            if (!$antenna->coordinates()->get()->contains(2)) {
+                $antenna->coordinates()->attach(2);
+            }
+        });
+    }
+
+    public function coordinates()
+    {
+        return $this->belongsToMany(Coordinate::class);
     }
 }

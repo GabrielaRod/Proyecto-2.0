@@ -10,7 +10,7 @@ class UpdateAntennaRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => [
+            'MacAddress' => [
                 'required', 'string',
             ]
         ];

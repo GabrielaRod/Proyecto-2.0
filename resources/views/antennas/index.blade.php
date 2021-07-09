@@ -17,10 +17,13 @@
                             <table class="min-w-full divide-y divide-gray-200 w-full">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
                                         Location
                                     </th>
-                                    <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                        Status
+                                    </th>                                    
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
                                         Actions
                                     </th>
                                 </tr>
@@ -31,7 +34,12 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
                                             {{ $antenna->Location }}
                                         </td>
-                                        <td class="px-6 py-3 whitespace-nowrap text-sm font-medium">
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                    {{ $antenna->Status }}
+                                                </span>
+                                        </td>
+                                        <td class="px-6 py-3 whitespace-nowrap text-sm text-center font-medium">
                                             <a href="{{ route('antennas.show', $antenna->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
                                             <a href="{{ route('antennas.edit', $antenna->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
                                             <form class="inline-block" action="{{ route('antennas.destroy', $antenna->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">

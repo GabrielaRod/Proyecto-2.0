@@ -22,6 +22,11 @@
                         {{ __('Antennas') }}
                     </x-jet-nav-link>
 
+                    <!-- Users -->
+                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                        {{ __('Users') }}
+                    </x-jet-nav-link>
+
                     <!-- Vehicles -->
                     <x-jet-nav-link :active="request()->routeIs('vehicles')" href="">
                         Vehicles

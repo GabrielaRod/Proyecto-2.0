@@ -16,15 +16,9 @@ class CreateAntennasTable extends Migration
         Schema::create('antennas', function (Blueprint $table) {
             $table->id();
             $table->char('MacAddress')->unique(); 
-            $table->string('Location');
-            $table->unsignedBigInteger('coordinate_id');
             $table->enum('Status', ['ACTIVE','INACTIVE'])->default('ACTIVE');         
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('coordinate_id')->references('id')->on('coordinates')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
 

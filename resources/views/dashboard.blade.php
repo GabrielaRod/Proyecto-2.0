@@ -11,7 +11,7 @@
                 <div class="maptrack" id="app">
                     <gmap-map
                     :center="mapCenter"
-                    :zoom="8"
+                    :zoom="9"
                     style="width: 100%; height: 550px;"
                     >
                         <gmap-marker

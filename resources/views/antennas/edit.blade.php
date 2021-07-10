@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Edit Antenna
+            Edit Antenna:
         </h2>
+        <p class="text-sm text-red-600">{{ $antenna->Location }}</p>
     </x-slot>
 
     <div>

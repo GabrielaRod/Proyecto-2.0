@@ -9,13 +9,6 @@ class Vehicle extends Model
 {
     use HasFactory;
 
-    /**
-     * Get the user that owns the vehicle.
-     */
-    public function appusers()
-    {
-        return $this->belongsTo(AppUser::class);
-    }
 
      /**
      * The tag that belongs to the vehicle.
@@ -23,5 +16,24 @@ class Vehicle extends Model
     public function tags()
     {
         return $this->hasOne(Tag::class, 'Tag');
+    }
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        self::created(function (Vehicle $vehicle) {
+            if (!$vehicle->app_users()->get()->contains(2)) {
+                $vehicle->app_users()->attach(2);
+            }
+        });
+    }
+
+    /**
+     * Get the app user that owns the vehicle.
+     */
+
+    public function app_users()
+    {
+        return $this->belongsToMany(AppUser::class);
     }
 }

@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Edit User
+            Edit User:
         </h2>
+        <p class="text-sm text-red-600">{{ $user->name }}</p>
     </x-slot>
 
     <div>

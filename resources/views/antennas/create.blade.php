@@ -12,6 +12,7 @@
                     @csrf
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
+                            {{-- MAC ADDRESS --}}
                             <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="MacAddress" class="block font-bold text-sm text-gray-700">Mac Address</label>
                             <input type="text" name="MacAddress" id="MacAddress" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
@@ -21,27 +22,7 @@
                             @enderror
                             </div>
 
-                            <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="Location" class="block font-bold text-sm text-gray-700">Location</label>
-                            <input type="text" name="Location" id="Location" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ old('Location', '') }}" />
-                            @error('Location')
-                                <p class="text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                            </div>
-
-                            <div class="px-4 py-5 bg-white sm:p-6">
-                                <label for="coordinate_id" class="block font-medium text-sm text-gray-700">Coordinate Id</label>
-                                <select name="coordinate_id[]" id="coordinate_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
-                                    @foreach($coordinates as $id => $coordinate)
-                                        <option value="{{ $id }}"{{ in_array($id, old('coordinate_id', [])) ? ' selected' : '' }}>{{ $coordinate }}</option>
-                                    @endforeach
-                                </select>
-                                @error('coordinate_id')
-                                    <p class="text-sm text-red-600">{{ $message }}</p>
-                                @enderror
-                            </div>
-
+                            {{-- STATUS --}}
                             <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="Status" class="block font-bold text-sm text-gray-700">Status</label>
                             <select name="Status" id="Status" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">

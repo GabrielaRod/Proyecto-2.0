@@ -21,7 +21,7 @@ class AntennaController extends Controller
     {
         //abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $antennas = Antenna::all();
+        $antennas = Antenna::with('coordinates')->get();
 
         return view('antennas.index', compact('antennas'));
     }

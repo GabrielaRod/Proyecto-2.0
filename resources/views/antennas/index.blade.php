@@ -26,13 +26,18 @@
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
                                         Actions
                                     </th>
+
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($antennas as $antenna)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
-                                            {{ $antenna->Location }}
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-900">
+                                            @foreach ($antenna->coordinates as $coordinate)
+                                                <span class="px-6 py-4 text-left whitespace-nowrap text-sm text-gray-900">
+                                                    {{ $coordinate->Location }}
+                                                </span>
+                                            @endforeach
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">

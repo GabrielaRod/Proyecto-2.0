@@ -30,9 +30,6 @@ Route::resource('users', UserController::class);
 Route::resource('vehicles', VehicleController::class);
 
 
-
-Route::post('/getvehicle', [VehicleController::class, 'getUser']);
-
 /*
 Route::resource('antennas', AntennaController::class);
 Route::resource('users', UserController::class);*/

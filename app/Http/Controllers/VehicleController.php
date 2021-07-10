@@ -54,7 +54,7 @@ class VehicleController extends Controller
     {
         $search = $request->search;
 
-        if($search == ''){
+        /* if($search == ''){
             $app_users = DB::table('app_users')->select('DomId', 'id')->orderBy('id','asc')->limit(5)->get();
         }
         else 
@@ -67,9 +67,9 @@ class VehicleController extends Controller
             $response[] = array("value"=>$app_user->id, "label"=>$app_user->DomId);
         }
 
-        return response()->json($response);
-        /* $app_users = DB::table('app_users')->where('DomId', 'LIKE', '%'.$search.'%');
-        return view('vehicle.edit', ['app_users'=> $app_users]); */
+        return response()->json($response); */
+        $app_users = DB::table('app_users')->where('DomId', 'LIKE', '%'.$search.'%');
+        return view('vehicle.edit', ['app_users'=> $app_users]); 
     }
 
 }

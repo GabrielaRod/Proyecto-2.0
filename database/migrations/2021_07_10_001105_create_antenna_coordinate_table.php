@@ -14,8 +14,8 @@ class CreateAntennaCoordinateTable extends Migration
     public function up()
     {
         Schema::create('antenna_coordinate', function (Blueprint $table) {
-            $table->foreignId('mac_address')->references('MacAddress')->on('antennas')->cascadeOnDelete();
-            $table->foreignId('location')->references('Location')->on('coordinates')->cascadeOnDelete();
+            $table->foreignId('antenna_id')->references('id')->on('antennas')->cascadeOnDelete();
+            $table->foreignId('coordinate_id')->references('id')->on('coordinates')->cascadeOnDelete();
         });
     }
 

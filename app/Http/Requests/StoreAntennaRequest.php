@@ -14,9 +14,9 @@ class StoreAntennaRequest extends FormRequest
                 'string',
                 'required',
             ],
-            'Location'=> [
+            'Status'=> [
+                'string',
                 'required',
-                'unique:antennas',
             ],
             'coordinate_id.*'=> [                
                 'integer',
@@ -25,10 +25,7 @@ class StoreAntennaRequest extends FormRequest
                 'required',
                 'array',
             ],
-            'Status'=> [
-                'string',
-                'required',
-            ],
+            
         ];
     }
 

@@ -19,11 +19,12 @@ class DatabaseSeeder extends Seeder
             AppUserVehicleTableSeeder::class,
             TagsTableSeeder::class,
             CoordinatesTableSeeder::class,
-            AntennasTableSeeder::class,   
+            AntennasTableSeeder::class,  
+            AntennaCoordinateTableSeeder::class, 
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
             PermissionRoleTableSeeder::class,
-            RoleUserTableSeeder::class,           
+            RoleUserTableSeeder::class,     
         ]);
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AntennaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::resource('antennas', AntennaController::class);
 Route::resource('users', UserController::class);
 Route::resource('vehicles', VehicleController::class);
+Route::resource('tags', TagController::class);
 
 
 /*

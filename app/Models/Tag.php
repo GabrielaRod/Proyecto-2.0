@@ -14,6 +14,6 @@ class Tag extends Model
      */
     public function vehicle()
     {
-        return $this->belongsTo(Vehicle::class, 'VIN');
+        return $this->belongsTo(Vehicle::class);
     }
 }

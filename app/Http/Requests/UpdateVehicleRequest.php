@@ -14,13 +14,13 @@ class UpdateVehicleRequest extends FormRequest
                 'string',
                 'required',
             ],
-            'app_user_id'    => [
+            'app_users_id'    => [
                 'integer',
                 'required',
             ],
             'id'   => [
                 'required',
-                'unique:VIN,' . request()->route('tag')->id,
+                'unique:VIN',
             ],
         ];
     }

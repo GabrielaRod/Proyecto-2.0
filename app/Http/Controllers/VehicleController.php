@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ViewVehicleRequest;
+use App\Http\Requests\UpdateVehicleRequest;
 use App\Models\Vehicle;
 use App\Models\AppUser;
 use Illuminate\Http\Request;

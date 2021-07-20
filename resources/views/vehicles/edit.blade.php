@@ -12,7 +12,7 @@
                 <form method="post" action="{{ route('vehicles.update', $vehicle->id) }}">
                     @csrf
                     @method('put')
-                    {{-- <div class="px-4 py-5 bg-white sm:p-6">
+                    <div class="px-4 py-5 bg-white sm:p-6">
                         <label for="app_users" class="block font-medium text-sm text-gray-700">Users</label>
                         <select name="app_users[]" id="app_users" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
                             @foreach($app_users as $domid => $app_user)
@@ -24,15 +24,15 @@
                         @error('app_users')
                             <p class="text-sm text-red-600">{{ $message }}</p>
                         @enderror
-                    </div> --}}
+                    </div>
 
-                    <div class="px-4 py-5 bg-white sm:p-6">
+                  {{--   <div class="px-4 py-5 bg-white sm:p-6">
                         <label for="app_users" class="block font-medium text-sm text-gray-700">Users</label>
                             <input type="getUser" name="app_users" class="form-control rounded-md shadow-sm mt-1 block w-full" placeholder="Search Id">
                         @error('app_users')
                             <p class="text-sm text-red-600">{{ $message }}</p>
                         @enderror
-                    </div>           
+                    </div>            --}}
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="email" class="block font-medium text-sm text-gray-700">Change Status</label>

@@ -170,12 +170,18 @@
             </x-jet-responsive-nav-link>
 
             <!-- Antennas -->
-            <x-jet-responsive-nav-link href="" :active="request()->routeIs('antennas')">
+            <x-jet-responsive-nav-link href="{{ route('antennas.index') }}" :active="request()->routeIs('antennas.index')">
                 Antennas
             </x-jet-responsive-nav-link>
 
+            <!-- Users -->
+            <x-jet-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                Vehicles
+            </x-jet-responsive-nav-link>
+
+
             <!-- Vehicles -->
-            <x-jet-responsive-nav-link :active="request()->routeIs('vehicles')" href="">
+            <x-jet-responsive-nav-link href="{{ route('vehicles.index') }}" :active="request()->routeIs('vehicles.index')">
                 Vehicles
             </x-jet-responsive-nav-link>
 
@@ -229,7 +235,7 @@
                 </form>
 
                 <!-- Team Management -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user()->current_team_id)
                     <div class="border-t border-gray-200"></div>
 
                     <div class="block px-4 py-2 text-xs text-gray-400">

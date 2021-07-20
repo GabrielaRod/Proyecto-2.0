@@ -8,7 +8,8 @@
     <div>
         <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="block mb-8">
-                <a href="{{ route('users.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add User</a>
+                <a href="{{ route('users.create') }}" class="bg-green-500 hover:bg-green-300 text-white text-xs font-medium py-2 px-4 border border-transparent rounded-md uppercase tracking-widest hover:bg-green-700 active:bg-green-300 focus:outline-none focus:border-green-900">Add User</a>
+                
             </div>
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

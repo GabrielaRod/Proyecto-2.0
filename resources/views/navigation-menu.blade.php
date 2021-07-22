@@ -22,6 +22,11 @@
                         {{ __('Antennas') }}
                     </x-jet-nav-link>
 
+                  {{--   <!-- Locations -->
+                    <x-jet-nav-link href="{{ route('coordinates.index') }}" :active="request()->routeIs('coordinates.index')">
+                        {{ __('Locations') }}
+                    </x-jet-nav-link> --}}
+
                     <!-- Users -->
                     <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                         {{ __('Users') }}

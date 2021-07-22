@@ -24,7 +24,7 @@ class TagFactory extends Factory
     {
         return [ 
             'Tag' => $this->faker->macAddress,
-            'vehicle_id' => rand(2,11),
+            'vehicle_id' => rand(1,8),
     
         ];
     }

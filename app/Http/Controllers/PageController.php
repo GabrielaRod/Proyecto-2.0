@@ -14,9 +14,8 @@ class PageController extends Controller
         /*The antenas that show in the Map are only the ones that are ACTIVE*/
         $markers = collect();
 
-        $coordinates =DB::table('antenna_coordinate')
-                        ->join('coordinates', 'coordinates.id', '=', 'antenna_coordinate.coordinate_id')
-                        ->join('antennas', 'antennas.id', '=', 'antenna_coordinate.antenna_id')
+        $coordinates = DB::table('antennas')
+                        ->join('coordinates', 'coordinates.id', '=', 'antennas.coordinate_id')
                         ->select('coordinates.latitude', 'coordinates.longitude')
                         ->where('antennas.status', 'ACTIVE')
                         ->get();

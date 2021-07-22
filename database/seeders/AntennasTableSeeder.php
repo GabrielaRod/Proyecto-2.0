@@ -16,13 +16,15 @@ public function run()
 {
             DB::table('antennas')->insert([
                 'MacAddress' => '15:9D:AF:BA:E6:24',
+                'coordinate_id' => 1,
                 'Status' => 'ACTIVE',
                 'created_at'=> date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
-            ]);
+            ]); 
 
             DB::table('antennas')->insert([
                 'MacAddress' => '94:84:11:C8:42:C1',
+                'coordinate_id' => 3,
                 'Status' => 'ACTIVE',
                 'created_at'=> date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -30,6 +32,7 @@ public function run()
 
             DB::table('antennas')->insert([
                 'MacAddress' => 'DE:D0:E3:7E:9B:89',
+                'coordinate_id' => 4,
                 'Status' => 'INACTIVE',
                 'created_at'=> date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -37,6 +40,7 @@ public function run()
 
             DB::table('antennas')->insert([
                 'MacAddress' => '89:E3:D0:7E:9B:DE',
+                'coordinate_id' => 2,
                 'Status' => 'ACTIVE',
                 'created_at'=> date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),

@@ -12,15 +12,9 @@ class UpdateVehicleRequest extends FormRequest
         return [
             'Status'    => [
                 'string',
-                'required',
             ],
-            'app_users_id'    => [
+            'app_user_id'    => [
                 'integer',
-                'required',
-            ],
-            'id'   => [
-                'required',
-                'unique:VIN',
             ],
         ];
     }

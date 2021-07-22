@@ -31,13 +31,15 @@ class AntennaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Antenna $antenna)
     {
         //abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $coordinates = Coordinate::pluck('id');
 
-        return view('antennas.create', compact('coordinates'));
+        $antenna->load('coordinates');
+
+        return view('antennas.create', compact('antenna', 'coordinates'));
     }
 
     /**
@@ -46,10 +48,10 @@ class AntennaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAntennaRequest $request)
+    public function store(StoreAntennaRequest $request, Antenna $antenna)
     {
-        $antenna = Antenna::create($request->validated());
-        $antenna->coordinates()->sync($request->input('coordinate_id', []));
+        $antenna->create($request->validated());
+        $antenna->coordinates()->sync($request->input('coordinates', []));
 
         return redirect()->route('antennas.index');
     }

@@ -36,6 +36,7 @@ class VehicleFactory extends Factory
             'Year' => $year,
             'Color' => $color,
             'Type' => $type,
+            'app_user_id' => rand(1,5),
             'Status' => 'Active',
         ];
     }

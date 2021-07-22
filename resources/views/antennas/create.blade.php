@@ -22,6 +22,21 @@
                             @enderror
                             </div>
 
+                            {{-- COORDINATE ID --}}
+                            <div class="px-4 py-1 bg-white sm:p-6">
+                                <label for="coordinates" class="block font-medium text-sm text-gray-700">Coordinate ID</label>
+                                <select name="coordinate_id" id="coordinate_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
+                                    @foreach($coordinates as $id => $coordinate)
+                                        <option value="{{ $id }}"{{ in_array($id, old('coordinates', $antenna->coordinates->pluck('id')->toArray())) ? ' selected' : '' }}>
+                                            {{ $coordinate }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('coordinate_id')
+                                    <p class="text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>              
+                            
                             {{-- STATUS --}}
                             <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="Status" class="block font-bold text-sm text-gray-700">Status</label>

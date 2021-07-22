@@ -50,26 +50,4 @@ class VehicleController extends Controller
         return redirect()->route('vehicles.index');
     }
 
-    public function getUser(Request $request)
-    {
-        $search = $request->search;
-
-        /* if($search == ''){
-            $app_users = DB::table('app_users')->select('DomId', 'id')->orderBy('id','asc')->limit(5)->get();
-        }
-        else 
-        {
-            $app_users = DB::table('app_users')->select('DomId', 'id')->where('DomId', 'LIKE', '%'.$search.'%')->orderBy('id','asc')->limit(5)->get();
-        }
-
-        $response = array();
-        foreach($app_users as $app_user){
-            $response[] = array("value"=>$app_user->id, "label"=>$app_user->DomId);
-        }
-
-        return response()->json($response); */
-        $app_users = DB::table('app_users')->where('DomId', 'LIKE', '%'.$search.'%');
-        return view('vehicle.edit', ['app_users'=> $app_users]); 
-    }
-
 }

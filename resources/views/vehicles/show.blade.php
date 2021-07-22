@@ -83,11 +83,9 @@
                                         User Id
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        @foreach ($vehicle->app_users as $app_user)
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                    {{ $app_user->id }}
+                                                    {{ $vehicle->app_user_id }}
                                                 </span>
-                                        @endforeach
                                     </td>
                                 </tr>
                             </table>

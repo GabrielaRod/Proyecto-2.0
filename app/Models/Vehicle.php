@@ -9,7 +9,9 @@ class Vehicle extends Model
 {
     use HasFactory;
 
-
+    protected $fillable = [
+        'Status', 'app_user_id'
+    ];
      /**
      * The tag that belongs to the vehicle.
      */

@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Antenna extends Model
 {
 
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
-        'description'
+        'MacAddress', 'coordinate_id', 'Status'
     ];
     
     public function __construct(array $attributes = [])

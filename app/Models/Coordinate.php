@@ -7,11 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coordinate extends Model
 {
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'Location',
+        'Latitude',
+        'Longitude',
+    ];
+
     /**
      * Get the coordinates that locate the Antena.
      */
 
-    public function __construct(array $attributes = [])
+    /* public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
         self::created(function (Coordinate $coordinate) {
@@ -24,5 +35,5 @@ class Coordinate extends Model
     public function antennas()
     {
         return $this->belongsToMany(Antenna::class);
-    }
+    } */
 }

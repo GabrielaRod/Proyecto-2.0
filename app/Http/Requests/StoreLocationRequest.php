@@ -5,24 +5,21 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
-class StoreAntennaRequest extends FormRequest
+class StoreLocationRequest extends FormRequest
 {
     public function rules()
     {
         return [
-            'MacAddress'=> [
+            'Location'=> [
                 'string',
                 'required',
             ],
-            'Status'=> [
-                'string',
+            'Latitude'=> [
+                'numeric',
                 'required',
             ],
-            'coordinate_id.*'=> [                
-                'integer',
-            ],
-            'coordinate_id'=> [
-                'array',
+            'Longitude'=> [
+                'numeric',
                 'required',
             ],
             

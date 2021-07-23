@@ -6,6 +6,7 @@ use App\Http\Controllers\AntennaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\CoordinateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::resource('antennas', AntennaController::class);
 Route::resource('users', UserController::class);
 Route::resource('vehicles', VehicleController::class);
 Route::resource('tags', TagController::class);
+Route::resource('coordinates', CoordinateController::class);
 
 
 /*

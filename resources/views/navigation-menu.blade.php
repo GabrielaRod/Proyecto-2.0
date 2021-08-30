@@ -17,11 +17,16 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
+                     <!-- Live Feed of the Antennas Scanning -->
+                     <x-jet-nav-link :active="request()->routeIs('livefeed.index')">
+                     {{ __('Live Feed') }}
+                    </x-jet-nav-link>
+                
                     <!-- Antennas -->
                     <x-jet-nav-link href="{{ route('antennas.index') }}" :active="request()->routeIs('antennas.index')">
                         {{ __('Antennas') }}
                     </x-jet-nav-link>
-
+                   
                     <!-- Locations -->
                     <x-jet-nav-link href="{{ route('coordinates.index') }}" :active="request()->routeIs('coordinates.index')">
                         {{ __('Locations') }}
@@ -37,15 +42,11 @@
                         {{ __('Vehicles') }}
                     </x-jet-nav-link>
 
-                    <!-- Live Feed of the Antennas Scanning -->
-                    <x-jet-nav-link :active="request()->routeIs('livefeed')" href="">
-                        Live Feed
-                    </x-jet-nav-link>
-
                     <!-- Reports -->
                     <x-jet-nav-link :active="request()->routeIs('reports')" href="">
                         Reports
                     </x-jet-nav-link>
+                
                 </div>
             </div>
 

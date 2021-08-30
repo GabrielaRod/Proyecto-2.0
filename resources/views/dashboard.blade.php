@@ -11,21 +11,37 @@
                 <div class="maptrack" id="app">
                     <gmap-map
                     :center="mapCenter"
-                    :zoom="9"
+                    :zoom="13"
+                    :options="{
+                    zoomControl: true,
+                    }"
                     style="width: 100%; height: 550px;"
                     >
                         <gmap-marker
                             v-for="(c, index) in coordinates"           {{-- For loop that retrieves the Coordinates from the coordinates array. --}}
                             :key="c.id"                                       {{-- Specifies de index as the id of the Coordinate --}}
                             :position="getPosition(c)"
+                            :clickable="true"
                             :draggable="false"
+                            @click="toggleInfoWindow(m,index)"
                         ></gmap-marker>
                         <gmap-marker
                             v-for="(a, index) in coordinates_assets"           {{-- For loop that creates a marker for each item in Coordinates array. --}}
                             :key="a.id"                                       {{-- Specifies de index as the id of the Coordinate --}}
                             :position="setPosition(a)"
+                            :clickable="true"
                             :draggable="false"
+                            @click="toggleInfoWindow(m,index)"
                         ></gmap-marker>
+
+                        <gmap-info-window
+                        :options="infoOptions"
+                        :position="infoWindowPosition"
+                        :opened="infoWinOpen"
+                        @closeclick="infoWinOpen=false"
+                        >
+                        <div v-html="infoContent"></div>
+                        </gmap-info-window>
                     </gmap-map>
                 </div>
             </div>

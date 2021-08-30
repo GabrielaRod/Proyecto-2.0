@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Coordinate;
+use App\Models\Location;
 use Illuminate\Support\Facades\DB;
 use stdClass;
 
@@ -14,7 +15,23 @@ class PageController extends Controller
         /*The antenas that show in the Map are only the ones that are ACTIVE*/
         $markers = collect();
 
-        $coordinates = DB::table('antennas')
+        /* TODO: PROBAR CON LA TABLA LOCATIONS PARA SOLO PRESENTAR ALGUN VIN QUE TENGA COMO STATUS ACTIVO EN TABLA REPORTS */
+
+        $coordinates = DB::table('locations')
+                        ->select('locations.latitude', 'locations.longitude', 'locations.TagID')
+                        ->get();
+
+        foreach ($coordinates as $c) {
+            $marker = new stdClass();
+            $marker->latitude = $c->latitude;
+            $marker->longitude = $c->longitude; 
+            $marker->infoText = $c->TagID; 
+            $markers->add($marker);
+        }
+
+        return $markers;
+
+        /* $coordinates = DB::table('antennas')
                         ->join('coordinates', 'coordinates.id', '=', 'antennas.coordinate_id')
                         ->select('coordinates.latitude', 'coordinates.longitude')
                         ->where('antennas.status', 'ACTIVE')
@@ -27,7 +44,7 @@ class PageController extends Controller
             $markers->add($marker);
         }
 
-        return $markers;
+        return $markers; */
     }
 
 }

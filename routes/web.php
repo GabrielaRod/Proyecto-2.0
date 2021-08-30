@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CoordinateController;
+use App\Http\Controllers\LiveFeedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,7 @@ Route::resource('users', UserController::class);
 Route::resource('vehicles', VehicleController::class);
 Route::resource('tags', TagController::class);
 Route::resource('coordinates', CoordinateController::class);
-
+Route::resource('livefeed', LiveFeedController::class);
 
 /*
 Route::resource('antennas', AntennaController::class);
@@ -44,3 +45,5 @@ Route::resource('users', UserController::class);*/
  */
 
 Route::get('/map', [PageController::class, 'markers']); 
+
+

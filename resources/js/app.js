@@ -15,7 +15,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 Vue.use(VueGoogleMaps, {
     load: {
-        key: ''
+        key: '',
+        autobindAllEvents: true,
+        installComponents: true
     }
 });
 
@@ -29,7 +31,17 @@ const app = new Vue({
                 height: -35
             },
             activeAntenna:{},
-            infoWindowOpened:false
+            infoWindowOpened:false,
+            infoContent: '',
+            infoWinOpen: false,
+            currentMidx: null,
+            //optional: offset infowindow so it visually sits nicely on top of our marker
+            infoOptions: {
+                pixelOffset: {
+                    width: 0,
+                    height: -35
+                }
+            }
         }
     },
 
@@ -50,6 +62,17 @@ const app = new Vue({
             this.coordinates_assets = a.assetscoordinates;
         });
     },
+
+    mounted() {
+        //set bounds of the map
+        this.$refs.gmap.$mapPromise.then((map) => {
+          const bounds = new google.maps.LatLngBounds()
+          for (let m of this.markers) {
+            bounds.extend(m.position)
+          }
+          map.fitBounds(bounds);
+        });
+      },
 
     methods: {
         getPosition(c) { //Get position from Array

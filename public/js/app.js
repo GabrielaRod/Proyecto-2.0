@@ -4996,6 +4996,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
+var _Vue;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -5013,10 +5017,12 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
 Vue.use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__, {
   load: {
-    key: ''
+    key: '',
+    autobindAllEvents: true,
+    installComponents: true
   }
 });
-var app = new Vue({
+var app = new Vue((_Vue = {
   el: '#app',
   data: function data() {
     //Hold Data as an Array of [Latitude, Longitud]
@@ -5027,7 +5033,17 @@ var app = new Vue({
         height: -35
       },
       activeAntenna: {},
-      infoWindowOpened: false
+      infoWindowOpened: false,
+      infoContent: 'Ultima vez visto',
+      infoWinOpen: false,
+      currentMidx: null,
+      //optional: offset infowindow so it visually sits nicely on top of our marker
+      infoOptions: {
+        pixelOffset: {
+          width: 0,
+          height: -35
+        }
+      }
     };
   },
   assetscoordinates: function assetscoordinates() {
@@ -5078,47 +5094,99 @@ var app = new Vue({
       }, _callee2);
     }))();
   },
-  methods: {
-    getPosition: function getPosition(c) {
-      //Get position from Array
-      return {
-        lat: parseFloat(c.latitude),
-        lng: parseFloat(c.longitude)
-      };
-    },
-    setPosition: function setPosition(a) {
-      //Will set the position of the asset from an Array
-      return {
-        lat: parseFloat(a.latitude),
-        lng: parseFloat(a.longitude)
-      };
-    }
+  //LIVE FEED DATA//
+  jsondata: function jsondata() {
+    //Hold Data as an Array of [Data, location_id]
+    return {
+      json: []
+    };
   },
-  computed: {
-    mapCenter: function mapCenter() {
-      if (!this.coordinates.lenght) {
-        //This becomes the center of the Map if theres no markers close,
-        return {
-          //this will be used when an alert is filled and we are looking for an asset
-          lat: 19.450245,
-          lng: -70.686466
-        };
-      }
+  taginformation: function taginformation() {
+    //Hold Data as an Array of [Data, location_id]
+    return {
+      tag_information: []
+    };
+  },
+  oncreate: function oncreate() {
+    var _this3 = this;
 
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              //Will run when the Vue cycle starts
+              axios__WEBPACK_IMPORTED_MODULE_2___default().get("livefeed").then(function (c) {
+                _this3.json = c.jsondata;
+              });
+
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
+  }
+}, _defineProperty(_Vue, "jsondata", function jsondata() {
+  var _this4 = this;
+
+  return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            //Will run when the Vue cycle starts
+            axios__WEBPACK_IMPORTED_MODULE_2___default().get("tags").then(function (a) {
+              _this4.tag_information = a.taginformation;
+            });
+
+          case 1:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }))();
+}), _defineProperty(_Vue, "methods", {
+  getPosition: function getPosition(c) {
+    //Get position from Array
+    return {
+      lat: parseFloat(c.latitude),
+      lng: parseFloat(c.longitude)
+    };
+  },
+  setPosition: function setPosition(a) {
+    //Will set the position of the asset from an Array
+    return {
+      lat: parseFloat(a.latitude),
+      lng: parseFloat(a.longitude)
+    };
+  }
+}), _defineProperty(_Vue, "computed", {
+  mapCenter: function mapCenter() {
+    if (!this.coordinates.lenght) {
+      //This becomes the center of the Map if theres no markers close,
       return {
-        //This uses the first coordinates in the array to use as center.
-        lat: parseFloat(this.coordinates[0].latitude),
-        lng: parseFloat(this.coordinates[0].longitude)
-      };
-    },
-    infoWindowPosition: function infoWindowPosition() {
-      return {
-        lat: parseFloat(this.activeAntenna.latitude),
-        lng: parseFloat(this.activeAntenna.longitude)
+        //this will be used when an alert is filled and we are looking for an asset
+        lat: 19.450245,
+        lng: -70.686466
       };
     }
+
+    return {
+      //This uses the first coordinates in the array to use as center.
+      lat: parseFloat(this.coordinates[0].latitude),
+      lng: parseFloat(this.coordinates[0].longitude)
+    };
+  },
+  infoWindowPosition: function infoWindowPosition() {
+    return {
+      lat: parseFloat(this.activeAntenna.latitude),
+      lng: parseFloat(this.activeAntenna.longitude)
+    };
   }
-});
+}), _Vue));
 
 /***/ }),
 

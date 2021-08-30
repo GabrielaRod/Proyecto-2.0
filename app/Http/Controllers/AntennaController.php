@@ -19,7 +19,7 @@ class AntennaController extends Controller
      */
     public function index()
     {
-        //abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $antennas = Antenna::with('coordinates')->get();
 
@@ -33,7 +33,7 @@ class AntennaController extends Controller
      */
     public function create(Antenna $antenna)
     {
-        //abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $coordinates = Coordinate::pluck('id');
 

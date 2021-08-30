@@ -20,7 +20,7 @@ class Vehicle extends Model
         return $this->hasOne(Tag::class, 'Tag');
     }
 
-    public function __construct(array $attributes = [])
+     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
         self::created(function (Vehicle $vehicle) {
@@ -37,5 +37,5 @@ class Vehicle extends Model
     public function app_users()
     {
         return $this->belongsToMany(AppUser::class);
-    }
+    } 
 }

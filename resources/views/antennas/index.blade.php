@@ -17,9 +17,8 @@
                             <table class="min-w-full divide-y divide-gray-200 w-full">
                                 <thead>
                                 <tr>
-                                    {{--CHANGE TO MAC ADDRESS INSTEAD--}}
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
-                                        Mac Address
+                                        Locations
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
                                         Status
@@ -33,10 +32,13 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($antennas as $antenna)
                                     <tr>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-900">
-                                            <span class="px-2 inline-flex text-s leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                                {{ $antenna->MacAddress }}
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-900">                                           
+                                            @foreach ($antenna->coordinates as $coordinate)
+                                             <span class="px-2 inline-flex text-s leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"> 
+                                                    {{ $coordinate->Location }}                                                                                
+                                                </td>                                               
                                             </span>
+                                            @endforeach
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">

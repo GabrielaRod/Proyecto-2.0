@@ -25,8 +25,11 @@ class VehicleController extends Controller
 
     public function show(Vehicle $vehicle)
     {
+        $app_users = AppUser::pluck('DomID', 'FirstName', 'LastName');
 
-        return view('vehicles.show', compact('vehicle'));
+        $vehicle->load('app_users');
+
+        return view('vehicles.show', compact('vehicle', 'app_users'));
     }
 
     public function edit(Vehicle $vehicle)

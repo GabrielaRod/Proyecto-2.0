@@ -25,9 +25,9 @@
                             {{-- COORDINATE ID --}}
                             <div class="px-4 py-1 bg-white sm:p-6">
                                 <label for="coordinates" class="block font-medium text-sm text-gray-700">Coordinate ID</label>
-                                <select name="coordinate_id" id="coordinate_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
+                                <select name="coordinate_id[]" id="coordinate_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
                                     @foreach($coordinates as $id => $coordinate)
-                                        <option value="{{ $id }}"{{ in_array($id, old('coordinates', $antenna->coordinates->pluck('id')->toArray())) ? ' selected' : '' }}>
+                                        <option value="{{ $id }}"{{ in_array($id, old('coordinate_id', [])) ? ' selected' : '' }}>
                                             {{ $coordinate }}
                                         </option>
                                     @endforeach

@@ -22,8 +22,9 @@ class StoreAntennaRequest extends FormRequest
                 'integer',
             ],
             'coordinate_id'=> [
-                'array',
                 'required',
+                'array',
+                
             ],
             
         ];

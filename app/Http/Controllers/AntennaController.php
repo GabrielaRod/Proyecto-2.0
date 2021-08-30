@@ -48,10 +48,10 @@ class AntennaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAntennaRequest $request, Antenna $antenna)
+    public function store(StoreAntennaRequest $request)
     {
-        $antenna->create($request->validated());
-        $antenna->coordinates()->sync($request->input('coordinates', []));
+        $antenna= Antenna::create($request->validated());
+        $antenna->coordinates()->sync($request->input('coordinate_id', []));
 
         return redirect()->route('antennas.index');
     }

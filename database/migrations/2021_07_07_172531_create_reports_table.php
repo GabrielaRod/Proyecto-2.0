@@ -21,7 +21,7 @@ class CreateReportsTable extends Migration
             $table->string('Color');
             $table->string('FirstName');
             $table->string('LastName');
-            $table->char('PhoneNumber');
+            $table->char('Email');
             $table->enum('Status', ['ACTIVE','INACTIVE'])->default('ACTIVE');            
             $table->timestamps();
         });

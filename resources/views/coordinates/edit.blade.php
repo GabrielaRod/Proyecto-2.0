@@ -25,7 +25,7 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="Latitude" class="block font-medium text-sm text-gray-700">Latitude</label>
                             <input type="number" name="Latitude" id="Latitude" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ old('Latitude', $coordinate->Latitude) }}" />
+                                   value="{{ old('Latitude', $coordinate->Latitude) }}" readonly="true"/>
                             @error('Latitude')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -34,7 +34,7 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="Longitude" class="block font-medium text-sm text-gray-700">Longitude</label>
                             <input type="number" name="Longitude" id="Longitude" class="form-input rounded-md shadow-sm mt-1 block w-full" 
-                                value="{{ old('Longitude', $coordinate->Longitude) }}" />
+                                value="{{ old('Longitude', $coordinate->Longitude) }}" readonly="true"/>
                             @error('Longitude')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror

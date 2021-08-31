@@ -60,4 +60,16 @@ class LiveFeedController extends Controller
 
         return response()->json($data);
     }
+
+    public function addData(Request $request)
+    {
+        // return response()->json($request);
+        $pepe = new LiveFeed();
+        $pepe->Data = $request->Json;
+        $pepe->location_id = $request->AntennaId;
+
+        $pepe->save();
+
+        return response()->json($pepe);
+    }
 }

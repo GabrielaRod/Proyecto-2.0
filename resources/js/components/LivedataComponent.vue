@@ -33,7 +33,7 @@
                 <td
                     class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap"
                 >
-                    {{ d.macAddress }}
+                    {{ d.data.macAddress }}
                 </td>
                 <td
                     class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap"
@@ -41,7 +41,6 @@
                     {{ d.location }}
                 </td>
             </tr>
-            @endforeach
         </tbody>
     </table>
 </template>
@@ -55,8 +54,16 @@ export default {
     },
     async created() {
         console.log("prueba");
-        const data = await axios.get("live/data");
+        const { data } = await axios.get("live/data");
         console.log(data);
+        this.data = data.map(x => {
+            const kk = JSON.parse(x.data.replaceAll("'", '"'));
+            return {
+                data: kk,
+                id: x.id,
+                location: x.location
+            };
+        });
     }
 };
 </script>

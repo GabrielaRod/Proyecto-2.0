@@ -2,7 +2,7 @@
     <div class="maptrack">
         <gmap-map
             :center="mapCenter"
-            :zoom="8"
+            :zoom="13"
             style="width: 100%; height: 550px;"
         >
             <gmap-marker

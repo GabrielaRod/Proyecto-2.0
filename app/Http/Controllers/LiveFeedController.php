@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LiveFeedUpdate;
 use Illuminate\Http\Request;
 use App\Models\LiveFeed;
 use Illuminate\Support\Facades\DB;
@@ -63,12 +64,19 @@ class LiveFeedController extends Controller
 
     public function addData(Request $request)
     {
-        // return response()->json($request);
         $pepe = new LiveFeed();
         $pepe->Data = $request->Json;
         $pepe->location_id = $request->AntennaId;
 
         $pepe->save();
+
+        $location = DB::table('livefeed')
+            ->join('coordinates', 'coordinates.id', '=', 'livefeed.location_id')
+            ->where('livefeed.id', $pepe->id)
+            ->select('livefeed.id', 'livefeed.data', 'coordinates.location')
+            ->first();
+
+        broadcast(new LiveFeedUpdate($location));
 
         return response()->json($pepe);
     }

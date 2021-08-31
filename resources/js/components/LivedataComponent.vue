@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-            <tr v-for="d in data" :key="d.id">
+            <tr v-for="d in dataFiltered" :key="d.id">
                 <td
                     class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap"
                 >
@@ -33,7 +33,7 @@
                 <td
                     class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap"
                 >
-                    {{ d.data.macAddress }}
+                    {{ d.data ? d.data.macAddress : d.data }}
                 </td>
                 <td
                     class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap"
@@ -52,17 +52,40 @@ export default {
             data: []
         };
     },
+    methods: {
+        async fetchData() {
+            const { data } = await axios.get("live/data");
+            console.log(data);
+            this.data = data;
+        }
+    },
+    computed: {
+        dataFiltered() {
+            return this.data
+                .sort((a, b) => b.id - a.id)
+                .slice(0, 10)
+                .map(x => {
+                    const kk = x.data
+                        ? JSON.parse(x.data.replaceAll("'", '"'))
+                        : x.data;
+                    return {
+                        data: kk,
+                        id: x.id,
+                        location: x.location
+                    };
+                });
+        }
+    },
     async created() {
-        console.log("prueba");
-        const { data } = await axios.get("live/data");
-        console.log(data);
-        this.data = data.map(x => {
-            const kk = JSON.parse(x.data.replaceAll("'", '"'));
-            return {
-                data: kk,
-                id: x.id,
-                location: x.location
-            };
+        await this.fetchData();
+        Echo.private("LiveFeedChannel").listen("LiveFeedUpdate", e => {
+            console.log("listening cosa");
+            console.log(e);
+            this.data.push({
+                id: e.id,
+                data: e.data ? e.data : null,
+                location: e.location
+            });
         });
     }
 };

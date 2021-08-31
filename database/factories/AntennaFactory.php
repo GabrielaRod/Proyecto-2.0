@@ -23,10 +23,10 @@ class AntennaFactory extends Factory
     public function definition()
     {
         return [
-            'MacAddress' => $faker->macAddress,
-            'Location' => $faker->address,
-            'coordinate_id' => rand(1,5),
-            'Status' =>  $faker->randomElement(['ACTIVE', 'INACTIVE']),
+            'MacAddress' => $this->faker->macAddress,
+            'Location' => $this->faker->address,
+            'coordinate_id' => rand(1, 5),
+            'Status' =>  $this->faker->randomElement(['ACTIVE', 'INACTIVE']),
 
         ];
     }

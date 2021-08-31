@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Information
+            Información
         </h2>
     </x-slot>
 
@@ -33,7 +33,7 @@
                                 {{-- Location --}}
                                 <tr class="border-b">
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Location
+                                        Dirección
                                     </th>
                                     @foreach ($antenna->coordinates as $coordinate)
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">  
@@ -44,7 +44,7 @@
                                 {{-- Status --}}
                                 <tr class="border-b">
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Status
+                                        Estatus
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="block mt-8">
-                <a href="{{ route('antennas.index') }}" class="bg-gray-200 hover:bg-gray-300 place-items-end text-black font-bold py-2 px-4 rounded">Back to list</a>
+                <a href="{{ route('antennas.index') }}" class="bg-gray-200 hover:bg-gray-300 place-items-end text-black font-bold py-2 px-4 rounded">Atrás</a>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">   
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Edit Vehicle VIN:
+            Editar Vehicle Matrícula:
         </h2>
         <p class="text-sm text-red-600">{{ $vehicle->VIN }}</p>
     </x-slot>
@@ -13,10 +13,10 @@
                     @csrf
                     @method('put')
                     <div class="px-4 py-5 bg-white sm:p-6">
-                        <label for="app_users" class="block font-medium text-sm text-gray-700">Users</label>
+                        <label for="app_users" class="block font-medium text-sm text-gray-700">Cédulas</label>
                         <select name="app_user_id" id="app_user_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
                             @foreach($app_users as $domid => $app_user)
-                                <option value="{{ $domid }}"{{ in_array($domid, old('app_users', $vehicle->app_users->pluck('DomId')->toArray())) ? ' selected' : '' }}>
+                                <option value="{{ $domid }}"{{ in_array($domid, old('app_users', $vehicle->app_users->pluck('DomId')->toArray())) ? ' selected' :'' }}>
                                     {{ $app_user }}
                                 </option>
                             @endforeach
@@ -27,10 +27,10 @@
                     </div>                   
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="email" class="block font-medium text-sm text-gray-700">Change Status</label>
+                            <label for="email" class="block font-medium text-sm text-gray-700">Cambiar Estatus</label>
                             <select name="Status" id="Status" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
-                                <option value="ACTIVE">ACTIVE</option>
-                                <option value="INACTIVE">INACTIVE</option>
+                                <option value="ACTIVE">ACTIVO</option>
+                                <option value="INACTIVE">INACTIVO</option>
                         </select>
                         @error('Status')
                             <p class="text-sm text-red-600">{{ $message }}</p>
@@ -38,10 +38,10 @@
                         </div>
                         <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
                             <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                <a href="{{ route('vehicles.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Back to list</a>
+                                <a href="{{ route('vehicles.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Atrás</a>
                                 </div>
                             <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                                Edit
+                                Editar
                             </button>
                         </div>
                     </div>

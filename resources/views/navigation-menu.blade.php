@@ -43,8 +43,8 @@
                     </x-jet-nav-link>
 
                     <!-- Reports -->
-                    <x-jet-nav-link :active="request()->routeIs('reports')" href="">
-                        Reportes
+                    <x-jet-nav-link href="{{ route('reports.index') }}" :active="request()->routeIs('reports.index')" >
+                        {{ __('Reportes') }}
                     </x-jet-nav-link>
                 
                 </div>

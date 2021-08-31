@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Lista de Vehiculos
+            Reportes
         </h2>
     </x-slot>
 
@@ -27,30 +27,43 @@
                                         Modelo
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
-                                        Opciones
+                                        Color
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                        Propietario
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                        Estatus
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($vehicles as $vehicle)
+                                @foreach ($reports as $report)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
-                                            {{ $vehicle->id }}
+                                            {{ $report->id }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
                                             <span class="px-2 inline-flex text-s leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"> 
-                                            {{ $vehicle->VIN }}
+                                            {{ $report->VIN }}
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
-                                            {{ $vehicle->Make }}
+                                            {{ $report->Make }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
-                                            {{ $vehicle->Model }}
+                                            {{ $report->Model }}
                                         </td>
-                                        <td class="px-6 py-3 whitespace-nowrap text-sm text-center font-medium">
-                                            <a href="{{ route('vehicles.show', $vehicle->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">Ver</a>
-                                            <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Editar</a>                                            
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
+                                            {{ $report->Color }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
+                                            {{ $report->FirstName ." ". $report->LastName }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            {{ $report->Status }}
+                                            </span>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -8,6 +8,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CoordinateController;
 use App\Http\Controllers\LiveFeedController;
+use App\Http\Controllers\ReportsController;
 use App\Events\LiveFeedUpdate;
 
 /*
@@ -35,6 +36,7 @@ Route::resource('vehicles', VehicleController::class);
 Route::resource('tags', TagController::class);
 Route::resource('coordinates', CoordinateController::class);
 Route::resource('livefeed', LiveFeedController::class);
+Route::resource('reports', ReportsController::class);
 
 /*
 Route::resource('antennas', AntennaController::class);
@@ -47,11 +49,5 @@ Route::resource('users', UserController::class);*/
 
 Route::get('/map', [PageController::class, 'markers']); 
 Route::get('/live', [PageController::class, 'livedata']); 
-
-Route::post('/live',function() {
-
-    event(new LiveFeedUpdate($livefeed));  //Broadcast LiveFeedUpdate event
-
-});
 
 

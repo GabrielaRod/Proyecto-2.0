@@ -59,10 +59,10 @@
                     @auth
                         <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Iniciar Sesión</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Registrarse</a>
                         @endif
                     @endauth
                 </div>
@@ -78,9 +78,9 @@
 		<!--Left Col-->
 		<div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
 			<h1 class="my-4 text-3xl md:text-5xl text-blue-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">Bienvenido!</h1>
-			<p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle">Contamos con las herramientas para brindarle seguridad a la ciudadania!</p>
+			<p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle">Contamos con las herramientas para brindarle seguridad a la ciudadanía!</p>
 		
-			<p class="text-blue-400 font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">Aplicacion disponible en:</p>
+			<p class="text-blue-400 font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">Aplicación disponible en:</p>
 			<div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
 				<img src="http://localhost/Proyecto-2.0/resources/logo/App Store.svg" class="h-12 pr-4 bounce-top-icons">
 				<img src="http://localhost/Proyecto-2.0/resources/logo/Play Store.svg" class="h-12 bounce-top-icons">
@@ -95,7 +95,7 @@
 		
 		<!--Footer-->
 		<div class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
-			<a class="text-gray-500 no-underline hover:no-underline" href="#">&copy; 2021 Creado por Gabriela Rodriguez, todos los derechos reservados.</a>
+			<a class="text-gray-500 no-underline hover:no-underline" href="#">&copy; 2021 Creado por Gabriela Rodríguez, todos los derechos reservados.</a>
 		</div>
 		
 	</div>

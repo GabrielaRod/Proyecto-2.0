@@ -16,10 +16,25 @@ class LiveFeedController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        /*The antenas that show in the Map are only the ones that are ACTIVE*/
+        $data = collect();
 
-        $livefeed = LiveFeed::all();
+        /* TODO: PROBAR CON LA TABLA LOCATIONS PARA SOLO PRESENTAR ALGUN VIN QUE TENGA COMO STATUS ACTIVO EN TABLA REPORTS */
 
-        return view('livefeed.index', compact('livefeed'));
+        $locations = DB::table('livefeed')
+                    ->join('coordinates', 'coordinates.id', '=', 'livefeed.location_id')
+                    ->select('livefeed.id', 'livefeed.data', 'coordinates.location')
+                    ->get();
+
+        foreach ($locations as $c) {
+            $dat = new stdClass();
+            $dat->id = $c->id;
+            $dat->data = $c->data;
+            $dat->location = $c->location; 
+            $data->add($dat);
+        }
+
+
+        return view('livefeed.index', compact('data'));
     }
 }

@@ -14,37 +14,37 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <!-- Dashboard -->
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Inicio') }}
                     </x-jet-nav-link>
 
                      <!-- Live Feed of the Antennas Scanning -->
-                     <x-jet-nav-link :active="request()->routeIs('livefeed.index')">
-                     {{ __('Live Feed') }}
+                     <x-jet-nav-link href="{{ route('livefeed.index') }}" :active="request()->routeIs('livefeed.index')">
+                     {{ __('Data en Vivo') }}
                     </x-jet-nav-link>
                 
                     <!-- Antennas -->
                     <x-jet-nav-link href="{{ route('antennas.index') }}" :active="request()->routeIs('antennas.index')">
-                        {{ __('Antennas') }}
+                        {{ __('Antenas') }}
                     </x-jet-nav-link>
                    
                     <!-- Locations -->
                     <x-jet-nav-link href="{{ route('coordinates.index') }}" :active="request()->routeIs('coordinates.index')">
-                        {{ __('Locations') }}
+                        {{ __('Localización') }}
                     </x-jet-nav-link>
 
                     <!-- Users -->
                     <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
-                        {{ __('Users') }}
+                        {{ __('Usuarios') }}
                     </x-jet-nav-link>
 
                     <!-- Vehicles -->
                     <x-jet-nav-link href="{{ route('vehicles.index') }}" :active="request()->routeIs('vehicles.index')">
-                        {{ __('Vehicles') }}
+                        {{ __('Vehiculos') }}
                     </x-jet-nav-link>
 
                     <!-- Reports -->
                     <x-jet-nav-link :active="request()->routeIs('reports')" href="">
-                        Reports
+                        Reportes
                     </x-jet-nav-link>
                 
                 </div>
@@ -184,7 +184,6 @@
             <x-jet-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                 Vehicles
             </x-jet-responsive-nav-link>
-
 
             <!-- Vehicles -->
             <x-jet-responsive-nav-link href="{{ route('vehicles.index') }}" :active="request()->routeIs('vehicles.index')">

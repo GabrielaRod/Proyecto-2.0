@@ -27,9 +27,7 @@
                                 <label for="coordinates" class="block font-medium text-sm text-gray-700">Coordinate ID</label>
                                 <select name="coordinate_id[]" id="coordinate_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
                                     @foreach($coordinates as $id => $coordinate)
-                                        <option value="{{ $id }}"{{ in_array($id, old('coordinate_id', [])) ? ' selected' : '' }}>
-                                            {{ $coordinate }}
-                                        </option>
+                                        <option value="{{ $id }}"{{ in_array($id, old('coordinate_id', [])) ? ' selected' : '' }}>{{ $coordinate }}</option>
                                     @endforeach
                                 </select>
                                 @error('coordinate_id')

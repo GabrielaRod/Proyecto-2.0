@@ -53,7 +53,7 @@ class CoordinateController extends Controller
     {
 
         $coordinate->update($request->validated());
-        $coordinate->antennas()->sync($request->input('coordinate_id', []));
+        //$coordinate->antennas()->sync($request->input('coordinate_id', []));
 
         return redirect()->route('coordinates.index');
     }

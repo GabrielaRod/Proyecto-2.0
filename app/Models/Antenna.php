@@ -26,6 +26,10 @@ class Antenna extends Model
 
     public function coordinates()
     {
-        return $this->belongsToMany(Coordinate::class);
+        return $this->belongsToMany(Coordinate::class)
+                    ->withPivot(
+                        'antenna_id', 
+                        'coordinate_id',
+                    );
     }
 }

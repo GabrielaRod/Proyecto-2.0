@@ -4,7 +4,6 @@
             Mapa
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -23,7 +22,6 @@
                             :position="getPosition(c)"
                             :clickable="true"
                             :draggable="false"
-                            @click="toggleInfoWindow(m,index)"
                         ></gmap-marker>
                         <gmap-marker
                             v-for="(a, index) in coordinates_assets"           {{-- For loop that creates a marker for each item in Coordinates array. --}}
@@ -31,14 +29,12 @@
                             :position="setPosition(a)"
                             :clickable="true"
                             :draggable="false"
-                            @click="toggleInfoWindow(m,index)"
                         ></gmap-marker>
 
                         <gmap-info-window
                         :options="infoOptions"
                         :position="infoWindowPosition"
-                        :opened="infoWinOpen"
-                        @closeclick="infoWinOpen=false"
+                        :opened="infoWinOpen"                    
                         >
                         <div v-html="infoContent"></div>
                         </gmap-info-window>

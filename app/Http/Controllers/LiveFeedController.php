@@ -73,7 +73,7 @@ class LiveFeedController extends Controller
         $location = DB::table('livefeed')
             ->join('coordinates', 'coordinates.id', '=', 'livefeed.location_id')
             ->where('livefeed.id', $pepe->id)
-            ->select('livefeed.id', 'livefeed.data', 'coordinates.location')
+            ->select('livefeed.id', 'livefeed.data', 'coordinates.location', 'coordinates.Latitude', 'coordinates.Longitude')
             ->first();
 
         broadcast(new LiveFeedUpdate($location));

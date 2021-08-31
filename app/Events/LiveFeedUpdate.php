@@ -41,7 +41,9 @@ class LiveFeedUpdate implements ShouldBroadcast
         return [
             'id' => $this->livefeed->id,
             'data' => $this->livefeed->data,
-            'location' => $this->livefeed->location
+            'location' => $this->livefeed->location,
+            'lat' => $this->livefeed->Latitude,
+            'lon' => $this->livefeed->Longitude
         ];
     }
 }

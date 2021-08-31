@@ -13,6 +13,9 @@ window.Vue = require('vue').default;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('map-component', require('./components/MapComponent.vue').default);
+Vue.component('livedata-component', require('./components/LivedataComponent.vue').default);
+// const files = require.context('./', true, /\.vue$/i)
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.use(VueGoogleMaps, {
     load: {
@@ -20,6 +23,10 @@ Vue.use(VueGoogleMaps, {
         autobindAllEvents: true,
         installComponents: true
     }
+});
+
+const app = new Vue({
+    el: '#app'
 });
 
 // const app = new Vue({

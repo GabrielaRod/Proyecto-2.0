@@ -22,19 +22,42 @@ class LiveFeedController extends Controller
         /* TODO: PROBAR CON LA TABLA LOCATIONS PARA SOLO PRESENTAR ALGUN VIN QUE TENGA COMO STATUS ACTIVO EN TABLA REPORTS */
 
         $locations = DB::table('livefeed')
-                    ->join('coordinates', 'coordinates.id', '=', 'livefeed.location_id')
-                    ->select('livefeed.id', 'livefeed.data', 'coordinates.location')
-                    ->get();
+            ->join('coordinates', 'coordinates.id', '=', 'livefeed.location_id')
+            ->select('livefeed.id', 'livefeed.data', 'coordinates.location')
+            ->get();
 
         foreach ($locations as $c) {
             $dat = new stdClass();
             $dat->id = $c->id;
             $dat->data = $c->data;
-            $dat->location = $c->location; 
+            $dat->location = $c->location;
             $data->add($dat);
         }
 
 
         return view('livefeed.index', compact('data'));
+    }
+
+    public function data()
+    {
+        /*The antenas that show in the Map are only the ones that are ACTIVE*/
+        $data = collect();
+
+        /* TODO: PROBAR CON LA TABLA LOCATIONS PARA SOLO PRESENTAR ALGUN VIN QUE TENGA COMO STATUS ACTIVO EN TABLA REPORTS */
+
+        $locations = DB::table('livefeed')
+            ->join('coordinates', 'coordinates.id', '=', 'livefeed.location_id')
+            ->select('livefeed.id', 'livefeed.data', 'coordinates.location')
+            ->get();
+
+        foreach ($locations as $c) {
+            $dat = new stdClass();
+            $dat->id = $c->id;
+            $dat->data = $c->data;
+            $dat->location = $c->location;
+            $data->add($dat);
+        }
+
+        return response()->json($data);
     }
 }

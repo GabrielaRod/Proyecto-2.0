@@ -26,7 +26,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');        
+    return view('dashboard');
 })->name('dashboard');
 
 Route::resource('antennas', AntennaController::class);
@@ -45,13 +45,13 @@ Route::resource('users', UserController::class);*/
  * Only showing the ones marked as Active
  */
 
-Route::get('/map', [PageController::class, 'markers']); 
-Route::get('/live', [PageController::class, 'livedata']); 
+Route::get('/map', [PageController::class, 'markers']);
+Route::get('/live', [PageController::class, 'livedata']);
 
-Route::post('/live',function() {
+// Route::post('/live',function() {
 
-    event(new LiveFeedUpdate($livefeed));  //Broadcast LiveFeedUpdate event
+//     event(new LiveFeedUpdate($livefeed));  //Broadcast LiveFeedUpdate event
 
-});
+// });
 
-
+Route::get('/live/data', [LiveFeedController::class, 'data']);

@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        
+
         $users = User::with('roles')->get();
 
         return view('users.index', compact('users'));
@@ -34,7 +34,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->validated());
-        $user->roles()->sync($request->input('roles', []));
+        //$user->roles()->sync($request->input('roles', []));
 
         return redirect()->route('users.index');
     }

@@ -38,7 +38,6 @@
         <!-- Page Content -->
         <main>
             <div id="app">
-                hola ;D
                 {{ $slot }}
             </div>
         </main>

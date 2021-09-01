@@ -1,7 +1,11 @@
 <x-app-layout>
     <x-slot name="header">   
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+<<<<<<< Updated upstream
             Editar Vehicle Matrícula:
+=======
+            Editar Vehiculo Matrícula:
+>>>>>>> Stashed changes
         </h2>
         <p class="text-sm text-red-600">{{ $vehicle->VIN }}</p>
     </x-slot>
@@ -13,7 +17,11 @@
                     @csrf
                     @method('put')
                     <div class="px-4 py-5 bg-white sm:p-6">
+<<<<<<< Updated upstream
                         <label for="app_users" class="block font-medium text-sm text-gray-700">Cédulas</label>
+=======
+                        <label for="app_users" class="block font-medium text-sm text-gray-700">Usuarios</label>
+>>>>>>> Stashed changes
                         <select name="app_user_id" id="app_user_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
                             @foreach($app_users as $domid => $app_user)
                                 <option value="{{ $domid }}"{{ in_array($domid, old('app_users', $vehicle->app_users->pluck('DomId')->toArray())) ? ' selected' :'' }}>
@@ -27,7 +35,11 @@
                     </div>                   
 
                         <div class="px-4 py-5 bg-white sm:p-6">
+<<<<<<< Updated upstream
                             <label for="email" class="block font-medium text-sm text-gray-700">Cambiar Estatus</label>
+=======
+                            <label for="email" class="block font-medium text-sm text-gray-700">Cambio de Estatus</label>
+>>>>>>> Stashed changes
                             <select name="Status" id="Status" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
                                 <option value="ACTIVE">ACTIVO</option>
                                 <option value="INACTIVE">INACTIVO</option>

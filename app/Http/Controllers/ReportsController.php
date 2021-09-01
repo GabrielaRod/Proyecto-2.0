@@ -33,8 +33,16 @@ class ReportsController extends Controller
             $reports->add($dat);
         }
 
+<<<<<<< Updated upstream
         
         //return $reports;        
         return view('reports.index', compact('reports'));
     }
 }
+=======
+
+        //return $reports;        
+        return view('reports.index', compact('reports'));
+    }
+}
+>>>>>>> Stashed changes

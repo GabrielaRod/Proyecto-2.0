@@ -20,3 +20,8 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('LiveFeedChannel', function () {
     return true;
 });
+
+Broadcast::channel('LocationChannel', function () {
+    return true;
+});
+

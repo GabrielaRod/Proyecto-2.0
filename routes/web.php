@@ -47,7 +47,8 @@ Route::resource('users', UserController::class);*/
  * Only showing the ones marked as Active
  */
 
-Route::get('/map', [PageController::class, 'markers']); 
+//Route::get('/map', [PageController::class, 'markers']); FUNCIONA, TRAE LOS LOCATIONS A MARCAR EN MAPA 
+Route::get('/map', [LiveFeedController::class, 'checkReports']); 
 Route::get('/live', [PageController::class, 'livedata']); 
 
 

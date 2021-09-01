@@ -5,18 +5,24 @@
             :zoom="13"
             style="width: 100%; height: 550px;"
         >
-            <gmap-marker
+           <!--  <gmap-marker  //FUNCIONA, ASIGNA LAT, LON AL MAPA
                 v-for="c in coordinates"
                 :key="c.id"
                 :position="getPosition(c)"
                 :draggable="false"
+            ></gmap-marker> -->
+             <gmap-marker
+                v-for="d in fetchData"
+                :key="d.id"
+                :position="{lat: d.Latitude, lng: d.Longitude}"
+                :draggable="false"
             ></gmap-marker>
-            <gmap-marker
+           <!--  <gmap-marker
                 v-for="a in coordinates_assets"
                 :key="a.id"
                 :position="setPosition(a)"
                 :draggable="false"
-            ></gmap-marker>
+            ></gmap-marker> -->
         </gmap-map>
     </div>
 </template>
@@ -51,29 +57,27 @@ export default {
             coordinates_assets: []
         };
     },
-    async created() {
+   /*  async created() {
         //Will run when the Vue cycle starts
         axios.get("map").then(c => {
             this.coordinates = c.data;
         });
-    },
+    }, */
+
     async markers() {
         //Will run when the Vue cycle starts
         axios.get("assets").then(a => {
             this.coordinates_assets = a.assetscoordinates;
         });
     },
-    mounted() {
-        //set bounds of the map
-        this.$refs.gmap.$mapPromise.then(map => {
-            const bounds = new google.maps.LatLngBounds();
-            for (let m of this.markers) {
-                bounds.extend(m.position);
-            }
-            map.fitBounds(bounds);
-        });
-    },
+
     methods: {
+        async fetchData() {
+            const { data } = await axios.get("map");
+            console.log(data);
+            this.data = data;
+        },
+
         getPosition(c) {
             //Get position from Array
             return {
@@ -90,6 +94,21 @@ export default {
         }
     },
     computed: {
+
+        async created() {
+        await this.fetchData();
+        Echo.private("LocationChannel").listen("LocationUpdate", e => {
+            console.log("Cosa mapa");
+            console.log(e);
+            this.data.push({
+                location: e.Location,
+                tagid: e.TagID,
+                lat: e.Latitude,
+                lon: e.Longitude
+            });
+        });
+        },
+
         mapCenter: function() {
             if (!this.coordinates.lenght) {
                 //This becomes the center of the Map if theres no markers close,

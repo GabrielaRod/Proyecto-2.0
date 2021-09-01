@@ -33,15 +33,17 @@ class LocationUpdate implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('new-location');
+        return new PrivateChannel('LocationChannel');
     }
 
     public function broadcastWith()
     {
         return [
-            'TagID' => $this->location->tagid,
-            'Latitude' => $this->location->latitude,
-            'Longitude' => $this->location->longitude
+            'id' => $this->location->id,
+            'location' => $this->location->Location,
+            'tagid' => $this->location->TagID,
+            'lat' => $this->location->Latitude,
+            'lon' => $this->location->Longitude
         ];
     }
 }

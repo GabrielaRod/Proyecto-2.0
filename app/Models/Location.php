@@ -12,9 +12,13 @@ class Location extends Model
     /**
      * The tags can be located in many places
      */
-    public function tag()
-    {
-        return $this->hasMany('App\Tag');
-    }
+    protected $table = 'locations';
+
+    protected $fillable = [
+        'Location',
+        'TagID',
+        'Latitude',
+        'Longitude'
+    ];
 
 }

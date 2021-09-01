@@ -2,42 +2,28 @@
     <table class="w-full min-w-full divide-y divide-gray-200">
         <thead>
             <tr>
-                <th
-                    scope="col"
-                    width="50"
-                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase bg-gray-50"
-                >
+                <th scope="col" width="50" class="px-6 py-3 text-xs font-bold tracking-wider text-center text-gray-500 uppercase bg-gray-50">
                     ID
                 </th>
-                <th
-                    scope="col"
-                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase bg-gray-50"
-                >
+                <th scope="col" class="px-6 py-3 text-xs font-bold tracking-wider text-center text-gray-500 uppercase bg-gray-50">
                     Mac Address
                 </th>
-                <th
-                    scope="col"
-                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase bg-gray-50"
-                >
-                    Location
+                <th scope="col" class="px-6 py-3 text-xs font-bold tracking-wider text-center text-gray-500 uppercase bg-gray-50">
+                    Dirección
                 </th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
             <tr v-for="d in dataFiltered" :key="d.id">
-                <td
-                    class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap"
-                >
+                <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
                     {{ d.id }}
                 </td>
-                <td
-                    class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap"
-                >
+                <td class="uppercase px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-s leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"> 
                     {{ d.data ? d.data.macAddress : d.data }}
+                    </span>
                 </td>
-                <td
-                    class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap"
-                >
+                <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
                     {{ d.location }}
                 </td>
             </tr>

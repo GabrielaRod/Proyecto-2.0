@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Events\LiveFeedUpdate;
 use Illuminate\Http\Request;
 use App\Models\LiveFeed;
+use App\Models\Location;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use stdClass;
 
 class LiveFeedController extends Controller
@@ -39,7 +41,7 @@ class LiveFeedController extends Controller
         return view('livefeed.index', compact('data'));
     }
 
-    public function data()
+    public function data() //VIEJA FUNCION PARA MANDAR LATITUDE Y LONGITUDE
     {
         /*The antenas that show in the Map are only the ones that are ACTIVE*/
         $data = collect();
@@ -62,6 +64,113 @@ class LiveFeedController extends Controller
         return response()->json($data);
     }
 
+    /* public function addLocation($macAddress, $coordinateid){  //FUNCION QUE FUNCIONA PARA LLENAR LA TABLA LOCATIONS
+
+
+        $datetime = Carbon::now()->subMinutes(5)->toDateTimeString();
+
+        $locationinfo = DB::table('coordinates')
+                        ->select('coordinates.*')
+                        ->where('coordinates.id', $coordinateid)
+                        ->first();
+
+        $exists = DB::table('locations')
+                ->where('locations.TagID', $macAddress)
+                ->where('created_at', '<=', $datetime)
+                ->exists();
+
+        if($exists == true){
+                return 'Already exists';
+        }
+        else {
+            $addlocation = DB::table('locations')
+                        ->insert([
+                                'Location' => $locationinfo->Location,
+                                'TagID' => $macAddress,
+                                'Latitude' => $locationinfo->Latitude,
+                                'Longitude' => $locationinfo->Longitude
+                        ]);
+
+        }
+
+    }  */
+
+    public function prueba($macAddress, $coordinateid){
+
+
+        $datetime = Carbon::now()->subMinutes(5)->toDateTimeString();
+
+        $locationinfo = DB::table('coordinates')
+                        ->select('coordinates.*')
+                        ->where('coordinates.id', $coordinateid)
+                        ->first();
+
+        $exists = DB::table('locations')
+                ->where('locations.TagID', $macAddress)
+                ->where('created_at', '<=', $datetime)
+                ->exists();
+
+        if($exists == true){
+                return 'Already exists';
+        }
+        else {
+
+                $data = new Location();
+
+                $data->Location = $locationinfo->Location;
+                $data->TagID = $macAddress;
+                $data->Latitude = $locationinfo->Latitude;
+                $data->Longitude = $locationinfo->Longitude;
+
+                $data->save();
+
+                $location = DB::table('locations')
+                    ->where('locations.id', $data->id)
+                    ->select('locations.id', 'locations.Location', 'locations.TagID', 'locations.Latitude', 'locations.Longitude')
+                    ->first();
+
+                broadcast(new LocationUpdate($location));
+
+                return response()->json($data);
+                
+        }
+
+    } 
+
+    public function checkReports($data){
+
+        $jsonenc = str_replace("'", '"', $data->Data);
+        $json = json_decode($jsonenc);      
+        $macAddress = $json->macAddress;
+        $coordinateid = $data->location_id;
+
+        $vehicle_id = DB::table('tags')
+                ->where('tags.Tag', $macAddress)
+                ->select('tags.vehicle_id')
+                ->first();
+        
+         $VIN = DB::table('vehicles')
+                ->where('vehicles.id', $vehicle_id->vehicle_id)
+                ->select('vehicles.VIN')
+                ->first(); 
+        
+
+        $exists = DB::table('reports')
+                ->where('reports.VIN', $VIN->VIN)
+                ->exists();
+        
+        if($exists == true){
+            //return $this->addLocation($macAddress, $coordinateid);
+            return $this->prueba($macAddress, $coordinateid);
+        } 
+        else{
+            return 'VIN no existe en tabla Reports';
+        }
+
+        //return $vehicle_id;
+            
+    }
+
     public function addData(Request $request)
     {
         $pepe = new LiveFeed();
@@ -78,6 +187,8 @@ class LiveFeedController extends Controller
 
         broadcast(new LiveFeedUpdate($location));
 
-        return response()->json($pepe);
+        $this->checkReports($pepe);
+
+        //return response()->json($pepe);
     }
 }

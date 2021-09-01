@@ -5034,20 +5034,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5145,18 +5131,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5209,7 +5195,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       coordinates_assets: []
     };
   },
-  created: function created() {
+
+  /*  async created() {
+       //Will run when the Vue cycle starts
+       axios.get("map").then(c => {
+           this.coordinates = c.data;
+       });
+   }, */
+  markers: function markers() {
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -5218,8 +5211,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               //Will run when the Vue cycle starts
-              axios.get("map").then(function (c) {
-                _this.coordinates = c.data;
+              axios.get("assets").then(function (a) {
+                _this.coordinates_assets = a.assetscoordinates;
               });
 
             case 1:
@@ -5230,52 +5223,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  markers: function markers() {
-    var _this2 = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              //Will run when the Vue cycle starts
-              axios.get("assets").then(function (a) {
-                _this2.coordinates_assets = a.assetscoordinates;
-              });
-
-            case 1:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }))();
-  },
-  mounted: function mounted() {
-    var _this3 = this;
-
-    //set bounds of the map
-    this.$refs.gmap.$mapPromise.then(function (map) {
-      var bounds = new google.maps.LatLngBounds();
-
-      var _iterator = _createForOfIteratorHelper(_this3.markers),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var m = _step.value;
-          bounds.extend(m.position);
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      map.fitBounds(bounds);
-    });
-  },
   methods: {
+    fetchData: function fetchData() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var _yield$axios$get, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get("map");
+
+              case 2:
+                _yield$axios$get = _context2.sent;
+                data = _yield$axios$get.data;
+                console.log(data);
+                _this2.data = data;
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
     getPosition: function getPosition(c) {
       //Get position from Array
       return {
@@ -5292,6 +5267,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   computed: {
+    created: function created() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return _this3.fetchData();
+
+              case 2:
+                Echo["private"]("LocationChannel").listen("LocationUpdate", function (e) {
+                  console.log("Cosa mapa");
+                  console.log(e);
+
+                  _this3.data.push({
+                    location: e.Location,
+                    tagid: e.TagID,
+                    lat: e.Latitude,
+                    lon: e.Longitude
+                  });
+                });
+
+              case 3:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
     mapCenter: function mapCenter() {
       if (!this.coordinates.lenght) {
         //This becomes the center of the Map if theres no markers close,
@@ -31276,13 +31283,22 @@ var render = function() {
               "td",
               {
                 staticClass:
-                  "px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap"
+                  "uppercase px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap"
               },
               [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(d.data ? d.data.macAddress : d.data) +
-                    "\n            "
+                _c(
+                  "span",
+                  {
+                    staticClass:
+                      "px-2 inline-flex text-s leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
+                  },
+                  [
+                    _vm._v(
+                      " \n                " +
+                        _vm._s(d.data ? d.data.macAddress : d.data) +
+                        "\n                "
+                    )
+                  ]
                 )
               ]
             ),
@@ -31317,7 +31333,7 @@ var staticRenderFns = [
           "th",
           {
             staticClass:
-              "px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase bg-gray-50",
+              "px-6 py-3 text-xs font-bold tracking-wider text-center text-gray-500 uppercase bg-gray-50",
             attrs: { scope: "col", width: "50" }
           },
           [_vm._v("\n                ID\n            ")]
@@ -31327,7 +31343,7 @@ var staticRenderFns = [
           "th",
           {
             staticClass:
-              "px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase bg-gray-50",
+              "px-6 py-3 text-xs font-bold tracking-wider text-center text-gray-500 uppercase bg-gray-50",
             attrs: { scope: "col" }
           },
           [_vm._v("\n                Mac Address\n            ")]
@@ -31337,10 +31353,10 @@ var staticRenderFns = [
           "th",
           {
             staticClass:
-              "px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase bg-gray-50",
+              "px-6 py-3 text-xs font-bold tracking-wider text-center text-gray-500 uppercase bg-gray-50",
             attrs: { scope: "col" }
           },
-          [_vm._v("\n                Location\n            ")]
+          [_vm._v("\n                Dirección\n            ")]
         )
       ])
     ])
@@ -31378,22 +31394,16 @@ var render = function() {
           staticStyle: { width: "100%", height: "550px" },
           attrs: { center: _vm.mapCenter, zoom: 13 }
         },
-        [
-          _vm._l(_vm.coordinates, function(c) {
-            return _c("gmap-marker", {
-              key: c.id,
-              attrs: { position: _vm.getPosition(c), draggable: false }
-            })
-          }),
-          _vm._v(" "),
-          _vm._l(_vm.coordinates_assets, function(a) {
-            return _c("gmap-marker", {
-              key: a.id,
-              attrs: { position: _vm.setPosition(a), draggable: false }
-            })
+        _vm._l(_vm.fetchData, function(d) {
+          return _c("gmap-marker", {
+            key: d.id,
+            attrs: {
+              position: { lat: d.Latitude, lng: d.Longitude },
+              draggable: false
+            }
           })
-        ],
-        2
+        }),
+        1
       )
     ],
     1

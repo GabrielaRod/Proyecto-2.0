@@ -16,25 +16,25 @@ class ReportsController extends Controller
         /* TODO: PROBAR CON LA TABLA LOCATIONS PARA SOLO PRESENTAR ALGUN VIN QUE TENGA COMO STATUS ACTIVO EN TABLA REPORTS */
 
         $data = DB::table('reports')
-                    ->select('reports.id', 'reports.VIN', 'reports.Make', 'reports.Model', 'reports.Color', 'reports.FirstName', 'reports.LastName', 'reports.Status')
-                    ->where('reports.Status', 'ACTIVE')
-                    ->get();
+            ->select('reports.id', 'reports.VIN', 'reports.Make', 'reports.Model', 'reports.Color', 'reports.FirstName', 'reports.LastName', 'reports.Status')
+            ->where('reports.Status', 'ACTIVE')
+            ->get();
 
         foreach ($data as $d) {
             $dat = new stdClass();
             $dat->id = $d->id;
             $dat->VIN = $d->VIN;
-            $dat->Make = $d->Make; 
-            $dat->Model = $d->Model; 
-            $dat->Color = $d->Color; 
-            $dat->FirstName = $d->FirstName; 
-            $dat->LastName = $d->LastName; 
-            $dat->Status = $d->Status; 
+            $dat->Make = $d->Make;
+            $dat->Model = $d->Model;
+            $dat->Color = $d->Color;
+            $dat->FirstName = $d->FirstName;
+            $dat->LastName = $d->LastName;
+            $dat->Status = $d->Status;
             $reports->add($dat);
         }
 
-        
-        //return $reports;        
+
+        //return $reports;
         return view('reports.index', compact('reports'));
     }
 }

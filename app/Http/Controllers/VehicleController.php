@@ -7,16 +7,16 @@ use App\Models\Vehicle;
 use App\Models\AppUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class VehicleController extends Controller
 {
     public function index()
     {
-        //abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $vehicles = Vehicle::all();
+        //$vehicles = Vehicle::all();
+        $vehicles = Vehicle::with('app_users')->get();
 
         return view('vehicles.index', compact('vehicles'));
     }

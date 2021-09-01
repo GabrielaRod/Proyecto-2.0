@@ -15,11 +15,11 @@ class Vehicle extends Model
      /**
      * The tag that belongs to the vehicle.
      */
-    public function tags()
+  /*   public function tags()
     {
         return $this->hasOne(Tag::class, 'Tag');
     }
-
+ */
      public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

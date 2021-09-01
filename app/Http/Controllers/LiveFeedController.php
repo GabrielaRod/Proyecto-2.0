@@ -162,6 +162,7 @@ class LiveFeedController extends Controller
         if($exists == true){
             //return $this->addLocation($macAddress, $coordinateid);
             return $this->prueba($macAddress, $coordinateid);
+
         } 
         else{
             return 'VIN no existe en tabla Reports';
@@ -189,6 +190,6 @@ class LiveFeedController extends Controller
 
         $this->checkReports($pepe);
 
-        //return response()->json($pepe);
+        return response()->json($pepe);
     }
 }

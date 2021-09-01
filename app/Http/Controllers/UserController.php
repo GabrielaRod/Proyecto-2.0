@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function create()
     {
-        //abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $roles = Role::pluck('title', 'id');
 
@@ -57,9 +57,8 @@ class UserController extends Controller
         return view('users.edit', compact('user', 'roles'));
     }
 
-    public function update(UpdateUserRequest $request, User $user, Tag $tag)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $tags = Tag::pluck('vehicle_id');
         $user->update($request->validated());
         $user->roles()->sync($request->input('roles', []));
 

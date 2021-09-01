@@ -13,8 +13,11 @@ class UpdateVehicleRequest extends FormRequest
             'Status'    => [
                 'string',
             ],
-            'app_user_id'    => [
+            'app_users.*'    => [
                 'integer',
+            ],
+            'app_users'    => [
+                'array',
             ],
         ];
     }

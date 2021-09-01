@@ -96,17 +96,17 @@ export default {
     computed: {
 
         async created() {
-        await this.fetchData();
-        Echo.private("LocationChannel").listen("LocationUpdate", e => {
-            console.log("Cosa mapa");
-            console.log(e);
-            this.data.push({
-                location: e.Location,
-                tagid: e.TagID,
-                lat: e.Latitude,
-                lon: e.Longitude
+            await this.fetchData();
+            Echo.private("LocationChannel").listen("LocationUpdate", e => {
+                console.log("Cosa mapa");
+                console.log(e);
+                this.data.push({
+                    location: e.Location,
+                    tagid: e.TagID,
+                    lat: e.Latitude,
+                    lon: e.Longitude
+                });
             });
-        });
         },
 
         mapCenter: function() {

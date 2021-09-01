@@ -19,10 +19,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import Echo from 'laravel-echo';
 
 window.Pusher = require('pusher-js');
+Pusher.logToConsole = true;
 
 window.Echo = new Echo({
      broadcaster: 'pusher',
-     key: process.env.MIX_PUSHER_APP_KEY,
-     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-     forceTLS: true
+     key: 'f01872c863970d2acec5',
+     cluster: 'us2'
+     //forceTLS: true
 });

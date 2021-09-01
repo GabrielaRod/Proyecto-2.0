@@ -33,15 +33,17 @@ class LiveFeedUpdate implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('new-entry');
+        return new PrivateChannel('LiveFeedChannel');
     }
 
     public function broadcastWith()
     {
         return [
             'id' => $this->livefeed->id,
-            'Data' => $this->livefeed->data,
-            'location_id' => $this->livefeed->location_id
+            'data' => $this->livefeed->data,
+            'location' => $this->livefeed->location,
+            'lat' => $this->livefeed->Latitude,
+            'lon' => $this->livefeed->Longitude
         ];
     }
 }

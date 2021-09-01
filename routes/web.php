@@ -51,3 +51,4 @@ Route::get('/map', [PageController::class, 'markers']);
 Route::get('/live', [PageController::class, 'livedata']); 
 
 
+Route::get('/live/data', [LiveFeedController::class, 'data']);

@@ -21,16 +21,8 @@ import Echo from 'laravel-echo';
 window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
-<<<<<<< Updated upstream
      broadcaster: 'pusher',
      key: 'ecce705f215b11ddad4e',
      cluster: 'mt1',
      forceTLS: true
 });
-=======
-      broadcaster: 'pusher',
-      key: 'f01872c863970d2acec5',
-      cluster: 'us2'//process.env.MIX_PUSHER_APP_CLUSTER,
-//      forceTLS: true
- });
->>>>>>> Stashed changes

@@ -5186,7 +5186,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           width: 0,
           height: -35
         }
-      }
+      },
+      data: []
     };
   },
   assetscoordinates: function assetscoordinates() {
@@ -5197,11 +5198,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
 
   /*  async created() {
-       //Will run when the Vue cycle starts
-       axios.get("map").then(c => {
-           this.coordinates = c.data;
-       });
-   }, */
+      //Will run when the Vue cycle starts
+      axios.get("map").then(c => {
+          this.coordinates = c.data;
+      });
+  }, */
   markers: function markers() {
     var _this = this;
 
@@ -5234,21 +5235,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                _context2.prev = 0;
+                _context2.next = 3;
                 return axios.get("map");
 
-              case 2:
+              case 3:
                 _yield$axios$get = _context2.sent;
                 data = _yield$axios$get.data;
                 console.log(data);
-                _this2.data = data;
 
-              case 6:
+                _this2.data.push(data);
+
+                _context2.next = 12;
+                break;
+
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](0);
+                console.log("error fetching map");
+
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
+        }, _callee2, null, [[0, 9]]);
       }))();
     },
     getPosition: function getPosition(c) {
@@ -5267,38 +5278,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   computed: {
-    created: function created() {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return _this3.fetchData();
-
-              case 2:
-                Echo["private"]("LocationChannel").listen("LocationUpdate", function (e) {
-                  console.log("Cosa mapa");
-                  console.log(e);
-
-                  _this3.data.push({
-                    location: e.Location,
-                    tagid: e.TagID,
-                    lat: e.Latitude,
-                    lon: e.Longitude
-                  });
-                });
-
-              case 3:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
-    },
     mapCenter: function mapCenter() {
       if (!this.coordinates.lenght) {
         //This becomes the center of the Map if theres no markers close,
@@ -5321,6 +5300,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         lng: parseFloat(this.activeAntenna.longitude)
       };
     }
+  },
+  created: function created() {
+    var _this3 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return _this3.fetchData();
+
+            case 2:
+              Echo["private"]("LocationChannel").listen("LocationUpdate", function (x) {
+                console.log("Cosa mapa");
+                console.log(x);
+
+                _this3.data.push(x);
+              });
+
+            case 3:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
   }
 });
 
@@ -31394,7 +31400,7 @@ var render = function() {
           staticStyle: { width: "100%", height: "550px" },
           attrs: { center: _vm.mapCenter, zoom: 13 }
         },
-        _vm._l(_vm.fetchData, function(d) {
+        _vm._l(_vm.data, function(d) {
           return _c("gmap-marker", {
             key: d.id,
             attrs: {

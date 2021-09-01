@@ -40,10 +40,10 @@ class LocationUpdate implements ShouldBroadcast
     {
         return [
             'id' => $this->location->id,
-            'location' => $this->location->Location,
-            'tagid' => $this->location->TagID,
-            'lat' => $this->location->Latitude,
-            'lon' => $this->location->Longitude
+            'Location' => $this->location->Location,
+            'TagID' => $this->location->TagID,
+            'Latitude' => $this->location->Latitude,
+            'Longitude' => $this->location->Longitude
         ];
     }
 }

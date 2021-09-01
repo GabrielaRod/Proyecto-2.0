@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\LiveFeedUpdate;
+use App\Events\LocationUpdate;
 use Illuminate\Http\Request;
 use App\Models\LiveFeed;
 use App\Models\Location;
@@ -50,7 +51,7 @@ class LiveFeedController extends Controller
 
         $locations = DB::table('livefeed')
             ->join('coordinates', 'coordinates.id', '=', 'livefeed.location_id')
-            ->select('livefeed.id', 'livefeed.data', 'coordinates.location')
+            ->select('livefeed.id', 'livefeed.data', 'coordinates.location', 'coordinates.Latitude', 'coordinates.Longitude')
             ->get();
 
         foreach ($locations as $c) {
@@ -58,6 +59,8 @@ class LiveFeedController extends Controller
             $dat->id = $c->id;
             $dat->data = $c->data;
             $dat->location = $c->location;
+            $dat->Latitude = $c->Latitude;
+            $dat->Longitude = $c->Longitude;
             $data->add($dat);
         }
 
@@ -95,81 +98,87 @@ class LiveFeedController extends Controller
 
     }  */
 
-    public function prueba($macAddress, $coordinateid){
 
+    public function dataLocation()
+    {
+        $location = DB::table('locations')
+            ->orderByDesc('locations.id')
+            ->select('locations.id', 'locations.Location', 'locations.TagID', 'locations.Latitude', 'locations.Longitude')
+            ->first();
 
+        return response()->json($location);
+    }
+
+    public function prueba($macAddress, $coordinateid)
+    {
         $datetime = Carbon::now()->subMinutes(5)->toDateTimeString();
 
         $locationinfo = DB::table('coordinates')
-                        ->select('coordinates.*')
-                        ->where('coordinates.id', $coordinateid)
-                        ->first();
+            ->select('coordinates.*')
+            ->where('coordinates.id', $coordinateid)
+            ->first();
 
         $exists = DB::table('locations')
-                ->where('locations.TagID', $macAddress)
-                ->where('created_at', '<=', $datetime)
-                ->exists();
+            ->where('locations.TagID', $macAddress)
+            ->where('created_at', '<=', $datetime)
+            ->exists();
 
-        if($exists == true){
-                return 'Already exists';
+        if ($exists == true) {
+            return 'Already exists';
+        } else {
+
+            $data = new Location();
+
+            $data->Location = $locationinfo->Location;
+            $data->TagID = $macAddress;
+            $data->Latitude = $locationinfo->Latitude;
+            $data->Longitude = $locationinfo->Longitude;
+
+            $data->save();
+
+            $location = DB::table('locations')
+                ->where('locations.id', $data->id)
+                ->select('locations.id', 'locations.Location', 'locations.TagID', 'locations.Latitude', 'locations.Longitude')
+                ->first();
+
+            broadcast(new LocationUpdate($location));
+
+            return true;
         }
-        else {
+    }
 
-                $data = new Location();
-
-                $data->Location = $locationinfo->Location;
-                $data->TagID = $macAddress;
-                $data->Latitude = $locationinfo->Latitude;
-                $data->Longitude = $locationinfo->Longitude;
-
-                $data->save();
-
-                $location = DB::table('locations')
-                    ->where('locations.id', $data->id)
-                    ->select('locations.id', 'locations.Location', 'locations.TagID', 'locations.Latitude', 'locations.Longitude')
-                    ->first();
-
-                broadcast(new LocationUpdate($location));
-
-                return response()->json($data);
-                
-        }
-
-    } 
-
-    public function checkReports($data){
+    public function checkReports($data)
+    {
 
         $jsonenc = str_replace("'", '"', $data->Data);
-        $json = json_decode($jsonenc);      
+        $json = json_decode($jsonenc);
         $macAddress = $json->macAddress;
         $coordinateid = $data->location_id;
 
         $vehicle_id = DB::table('tags')
-                ->where('tags.Tag', $macAddress)
-                ->select('tags.vehicle_id')
-                ->first();
-        
-         $VIN = DB::table('vehicles')
-                ->where('vehicles.id', $vehicle_id->vehicle_id)
-                ->select('vehicles.VIN')
-                ->first(); 
-        
+            ->where('tags.Tag', $macAddress)
+            ->select('tags.vehicle_id')
+            ->first();
+
+        $VIN = DB::table('vehicles')
+            ->where('vehicles.id', $vehicle_id->vehicle_id)
+            ->select('vehicles.VIN')
+            ->first();
+
 
         $exists = DB::table('reports')
-                ->where('reports.VIN', $VIN->VIN)
-                ->exists();
-        
-        if($exists == true){
+            ->where('reports.VIN', $VIN->VIN)
+            ->exists();
+
+        if ($exists == true) {
             //return $this->addLocation($macAddress, $coordinateid);
             return $this->prueba($macAddress, $coordinateid);
-
-        } 
-        else{
-            return 'VIN no existe en tabla Reports';
+        } else {
+            return false;
         }
 
         //return $vehicle_id;
-            
+
     }
 
     public function addData(Request $request)

@@ -5,19 +5,19 @@
             :zoom="13"
             style="width: 100%; height: 550px;"
         >
-           <!--  <gmap-marker  //FUNCIONA, ASIGNA LAT, LON AL MAPA
+            <!--  <gmap-marker  //FUNCIONA, ASIGNA LAT, LON AL MAPA
                 v-for="c in coordinates"
                 :key="c.id"
                 :position="getPosition(c)"
                 :draggable="false"
             ></gmap-marker> -->
-             <gmap-marker
-                v-for="d in fetchData"
+            <gmap-marker
+                v-for="d in data"
                 :key="d.id"
-                :position="{lat: d.Latitude, lng: d.Longitude}"
+                :position="{ lat: d.Latitude, lng: d.Longitude }"
                 :draggable="false"
             ></gmap-marker>
-           <!--  <gmap-marker
+            <!--  <gmap-marker
                 v-for="a in coordinates_assets"
                 :key="a.id"
                 :position="setPosition(a)"
@@ -48,7 +48,8 @@ export default {
                     width: 0,
                     height: -35
                 }
-            }
+            },
+            data: []
         };
     },
     assetscoordinates() {
@@ -57,7 +58,7 @@ export default {
             coordinates_assets: []
         };
     },
-   /*  async created() {
+    /*  async created() {
         //Will run when the Vue cycle starts
         axios.get("map").then(c => {
             this.coordinates = c.data;
@@ -73,9 +74,13 @@ export default {
 
     methods: {
         async fetchData() {
-            const { data } = await axios.get("map");
-            console.log(data);
-            this.data = data;
+            try {
+                const { data } = await axios.get("map");
+                console.log(data);
+                this.data.push(data);
+            } catch {
+                console.log("error fetching map");
+            }
         },
 
         getPosition(c) {
@@ -94,21 +99,6 @@ export default {
         }
     },
     computed: {
-
-        async created() {
-            await this.fetchData();
-            Echo.private("LocationChannel").listen("LocationUpdate", e => {
-                console.log("Cosa mapa");
-                console.log(e);
-                this.data.push({
-                    location: e.Location,
-                    tagid: e.TagID,
-                    lat: e.Latitude,
-                    lon: e.Longitude
-                });
-            });
-        },
-
         mapCenter: function() {
             if (!this.coordinates.lenght) {
                 //This becomes the center of the Map if theres no markers close,
@@ -130,6 +120,14 @@ export default {
                 lng: parseFloat(this.activeAntenna.longitude)
             };
         }
+    },
+    async created() {
+        await this.fetchData();
+        Echo.private("LocationChannel").listen("LocationUpdate", x => {
+            console.log("Cosa mapa");
+            console.log(x);
+            this.data.push(x);
+        });
     }
 };
 </script>

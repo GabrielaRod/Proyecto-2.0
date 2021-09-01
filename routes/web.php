@@ -27,7 +27,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');        
+    return view('dashboard');
 })->name('dashboard');
 
 Route::resource('antennas', AntennaController::class);
@@ -47,9 +47,9 @@ Route::resource('users', UserController::class);*/
  * Only showing the ones marked as Active
  */
 
-//Route::get('/map', [PageController::class, 'markers']); FUNCIONA, TRAE LOS LOCATIONS A MARCAR EN MAPA 
-Route::get('/map', [LiveFeedController::class, 'checkReports']); 
-Route::get('/live', [PageController::class, 'livedata']); 
+//Route::get('/map', [PageController::class, 'markers']); FUNCIONA, TRAE LOS LOCATIONS A MARCAR EN MAPA
+Route::get('/map', [LiveFeedController::class, 'dataLocation']);
+Route::get('/live', [PageController::class, 'livedata']);
 
 
 Route::get('/live/data', [LiveFeedController::class, 'data']);

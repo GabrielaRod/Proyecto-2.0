@@ -16,7 +16,12 @@
                 :key="d.id"
                 :position="{ lat: d.Latitude, lng: d.Longitude }"
                 :draggable="false"
-            ></gmap-marker>
+            >
+                <GmapInfoWindow>
+                    <div><strong>TAG:</strong> {{ d.TagID }}</div>
+                    <div><strong>Location:</strong> {{ d.Location }}</div>
+                </GmapInfoWindow>
+            </gmap-marker>
             <!--  <gmap-marker
                 v-for="a in coordinates_assets"
                 :key="a.id"

@@ -9,6 +9,7 @@ use App\Models\LiveFeed;
 use App\Models\Location;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use stdClass;
 
 class LiveFeedController extends Controller
@@ -67,36 +68,34 @@ class LiveFeedController extends Controller
         return response()->json($data);
     }
 
-    /* public function addLocation($macAddress, $coordinateid){  //FUNCION QUE FUNCIONA PARA LLENAR LA TABLA LOCATIONS
+    // //FUNCION QUE FUNCIONA PARA LLENAR LA TABLA LOCATIONS
+    // public function addLocation($macAddress, $coordinateid)
+    // {
+    //     $datetime = Carbon::now()->subMinutes(5)->toDateTimeString();
 
+    //     $locationinfo = DB::table('coordinates')
+    //         ->select('coordinates.*')
+    //         ->where('coordinates.id', $coordinateid)
+    //         ->first();
 
-        $datetime = Carbon::now()->subMinutes(5)->toDateTimeString();
+    //     $exists = DB::table('locations')
+    //         ->where('locations.TagID', $macAddress)
+    //         ->where('created_at', '>=', $datetime)
+    //         ->exists();
 
-        $locationinfo = DB::table('coordinates')
-                        ->select('coordinates.*')
-                        ->where('coordinates.id', $coordinateid)
-                        ->first();
-
-        $exists = DB::table('locations')
-                ->where('locations.TagID', $macAddress)
-                ->where('created_at', '<=', $datetime)
-                ->exists();
-
-        if($exists == true){
-                return 'Already exists';
-        }
-        else {
-            $addlocation = DB::table('locations')
-                        ->insert([
-                                'Location' => $locationinfo->Location,
-                                'TagID' => $macAddress,
-                                'Latitude' => $locationinfo->Latitude,
-                                'Longitude' => $locationinfo->Longitude
-                        ]);
-
-        }
-
-    }  */
+    //     if ($exists == true) {
+    //         return "pepe2";
+    //     } else {
+    //         $addlocation = DB::table('locations')
+    //             ->insert([
+    //                 'Location' => $locationinfo->Location,
+    //                 'TagID' => $macAddress,
+    //                 'Latitude' => $locationinfo->Latitude,
+    //                 'Longitude' => $locationinfo->Longitude
+    //             ]);
+    //         return $addlocation;
+    //     }
+    // }
 
 
     public function dataLocation()
@@ -120,13 +119,13 @@ class LiveFeedController extends Controller
 
         $exists = DB::table('locations')
             ->where('locations.TagID', $macAddress)
-            ->where('created_at', '<=', $datetime)
+            ->where('created_at', '>=', $datetime)
             ->exists();
 
         if ($exists == true) {
-            return 'Already exists';
+            return null;
         } else {
-
+            Log::info('This is some useful information.');
             $data = new Location();
 
             $data->Location = $locationinfo->Location;
@@ -143,7 +142,7 @@ class LiveFeedController extends Controller
 
             broadcast(new LocationUpdate($location));
 
-            return true;
+            return $location;
         }
     }
 
@@ -171,14 +170,10 @@ class LiveFeedController extends Controller
             ->exists();
 
         if ($exists == true) {
-            //return $this->addLocation($macAddress, $coordinateid);
             return $this->prueba($macAddress, $coordinateid);
         } else {
-            return false;
+            return "pepe1";
         }
-
-        //return $vehicle_id;
-
     }
 
     public function addData(Request $request)
@@ -197,7 +192,8 @@ class LiveFeedController extends Controller
 
         broadcast(new LiveFeedUpdate($location));
 
-        $this->checkReports($pepe);
+        $respuestaDeVerdad = $this->checkReports($pepe);
+        $pepe->respuestaDeVerdad = $respuestaDeVerdad;
 
         return response()->json($pepe);
     }

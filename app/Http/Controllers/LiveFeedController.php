@@ -110,7 +110,7 @@ class LiveFeedController extends Controller
 
     public function prueba($macAddress, $coordinateid)
     {
-        $datetime = Carbon::now()->subMinutes(5)->toDateTimeString();
+        $datetime = Carbon::now()->subMinutes(1)->toDateTimeString();
 
         $locationinfo = DB::table('coordinates')
             ->select('coordinates.*')

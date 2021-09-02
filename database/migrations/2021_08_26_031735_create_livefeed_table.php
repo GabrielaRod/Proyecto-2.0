@@ -19,7 +19,7 @@ class CreateLivefeedTable extends Migration
             $table->unsignedBigInteger('location_id');
             $table->timestamps();
 
-            $table->foreign('location_id')->references('id')->on('locations')
+            $table->foreign('location_id')->references('id')->on('coordinates')
                 ->onDelete('cascade');
         });
     }

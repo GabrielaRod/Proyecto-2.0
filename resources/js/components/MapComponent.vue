@@ -18,7 +18,7 @@
                 :draggable="false"
             >
                 <GmapInfoWindow>
-                    <div><strong>TAG:</strong> {{ d.TagID }}</div>
+                    <div><strong>TAG:{{ d.TagID }}</div>
                     <div><strong>Location:</strong> {{ d.Location }}</div>
                 </GmapInfoWindow>
             </gmap-marker>

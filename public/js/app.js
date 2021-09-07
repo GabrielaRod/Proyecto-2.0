@@ -31417,10 +31417,7 @@ var render = function() {
             },
             [
               _c("GmapInfoWindow", [
-                _c("div", [
-                  _c("strong", [_vm._v("TAG:")]),
-                  _vm._v(" " + _vm._s(d.TagID))
-                ]),
+                _c("div", [_c("strong", [_vm._v("TAG:" + _vm._s(d.TagID))])]),
                 _vm._v(" "),
                 _c("div", [
                   _c("strong", [_vm._v("Location:")]),

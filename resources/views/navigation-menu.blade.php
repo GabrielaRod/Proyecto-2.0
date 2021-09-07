@@ -21,12 +21,12 @@
                      <x-jet-nav-link href="{{ route('livefeed.index') }}" :active="request()->routeIs('livefeed.index')">
                      {{ __('Data en Vivo') }}
                     </x-jet-nav-link>
-                
+
                     <!-- Antennas -->
                     <x-jet-nav-link href="{{ route('antennas.index') }}" :active="request()->routeIs('antennas.index')">
                         {{ __('Antenas') }}
                     </x-jet-nav-link>
-                   
+
                     <!-- Locations -->
                     <x-jet-nav-link href="{{ route('coordinates.index') }}" :active="request()->routeIs('coordinates.index')">
                         {{ __('Localización') }}
@@ -46,7 +46,7 @@
                     <x-jet-nav-link href="{{ route('reports.index') }}" :active="request()->routeIs('reports.index')" >
                         {{ __('Reportes') }}
                     </x-jet-nav-link>
-                
+
                 </div>
             </div>
 

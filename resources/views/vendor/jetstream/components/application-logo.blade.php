@@ -5,5 +5,5 @@
 </svg> --}}
 
 <a href="/">
-  <img src="http://localhost/Proyecto-2.0/resources/logo/Logo 85x26.SVG" />
+    <img src="{{asset('logo/Logo 85x26.svg')}}"/>
 </a>

@@ -11,12 +11,14 @@ class StoreVehicleRequest extends FormRequest
     {
         return [
             'Status'    => [
+                'required',
                 'string',
             ],
             'app_users.*'    => [
                 'integer',
             ],
             'app_users'    => [
+                'required',
                 'array',
             ],
         ];

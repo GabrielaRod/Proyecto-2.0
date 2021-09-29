@@ -14,11 +14,11 @@
                     @method('put')
                     <div class="px-4 py-5 bg-white sm:p-6">
                         <label for="app_users" class="block text-sm font-medium text-gray-700">Cédulas</label>
-                        <select name="app_user_id" id="app_user_id"
+                        <select name="app_users[]" id="app_user_id"
                             class="block w-full mt-1 rounded-md shadow-sm form-multiselect" multiple="multiple">
                             @foreach($app_users as $domid => $app_user)
                             <option value="{{ $domid }}"
-                                {{ in_array($domid, old('app_users', $vehicle->app_users->pluck('DomId')->toArray())) ? ' selected' :'' }}>
+                                {{ in_array($domid, old('app_user_id', $vehicle->app_users->pluck('DomId')->toArray())) ? ' selected' :'' }}>
                                 {{ $app_user }}
                             </option>
                             @endforeach

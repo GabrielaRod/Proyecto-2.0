@@ -17,6 +17,7 @@ class UpdateVehicleRequest extends FormRequest
                 'integer',
             ],
             'app_users'    => [
+                'required',
                 'array',
             ],
         ];

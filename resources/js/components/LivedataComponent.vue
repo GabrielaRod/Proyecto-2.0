@@ -6,7 +6,7 @@
                     ID
                 </th>
                 <th scope="col" class="px-6 py-3 text-xs font-bold tracking-wider text-center text-gray-500 uppercase bg-gray-50">
-                    Mac Address
+                    Tag ID
                 </th>
                 <th scope="col" class="px-6 py-3 text-xs font-bold tracking-wider text-center text-gray-500 uppercase bg-gray-50">
                     Dirección
@@ -19,7 +19,7 @@
                     {{ d.id }}
                 </td>
                 <td class="uppercase px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
-                    <span class="px-2 inline-flex text-s leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"> 
+                    <span class="px-2 inline-flex text-s leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                     {{ d.data ? d.data.macAddress : d.data }}
                     </span>
                 </td>

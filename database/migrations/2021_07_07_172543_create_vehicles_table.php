@@ -15,13 +15,14 @@ class CreateVehiclesTable extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->char('VIN')->unique(); 
+            $table->char('VIN')->unique();
+            $table->char('LicensePlate')->unique();
             $table->string('Make');
             $table->string('Model');
             $table->integer('Year');
             $table->string('Color');
             $table->string('Type');
-            $table->enum('Status', ['ACTIVE','INACTIVE'])->default('ACTIVE'); 
+            $table->enum('Status', ['ACTIVE','INACTIVE'])->default('ACTIVE');
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MapAntennaUpdate;
 use Illuminate\Http\Request;
 use App\Models\Coordinate;
 use App\Models\Location;
@@ -16,6 +17,7 @@ class PageController extends Controller
         /*The antenas that show in the Map are only the ones that are ACTIVE*/
         $markers = collect();
 
+
         /* TODO: PROBAR CON LA TABLA LOCATIONS PARA SOLO PRESENTAR ALGUN VIN QUE TENGA COMO STATUS ACTIVO EN TABLA REPORTS */
 
         $coordinates = DB::table('locations')
@@ -25,27 +27,37 @@ class PageController extends Controller
         foreach ($coordinates as $c) {
             $marker = new stdClass();
             $marker->latitude = $c->latitude;
-            $marker->longitude = $c->longitude; 
-            $marker->infoText = $c->TagID; 
+            $marker->longitude = $c->longitude;
+            $marker->infoText = $c->TagID;
             $markers->add($marker);
         }
 
         return $markers;
+    }
 
-        /* $coordinates = DB::table('antennas')
+    public function mapAntenna()
+    {
+        /*The antenas that show in the Map are only the ones that are ACTIVE*/
+        $data = collect();
+
+        /* TODO: PROBAR CON LA TABLA LOCATIONS PARA SOLO PRESENTAR ALGUN VIN QUE TENGA COMO STATUS ACTIVO EN TABLA REPORTS */
+
+        $coordinates = DB::table('antennas')
                         ->join('coordinates', 'coordinates.id', '=', 'antennas.coordinate_id')
-                        ->select('coordinates.latitude', 'coordinates.longitude')
-                        ->where('antennas.status', 'ACTIVE')
-                        ->get();
+                        ->select('coordinates.latitude', 'coordinates.longitude', 'antennas.status')
+                        ->first();
 
-        foreach ($coordinates as $c) {
-            $marker = new stdClass();
-            $marker->latitude = $c->latitude;
-            $marker->longitude = $c->longitude; 
-            $markers->add($marker);
-        }
+       /*  foreach ($coordinates as $c) {
+            $dat = new stdClass();
+            $dat->latitude = $c->latitude;
+            $dat->longitude = $c->longitude;
+            $dat->status = $c->status;
+            $data->add($dat);
+        } */
 
-        return $markers; */
+        broadcast(new MapAntennaUpdate($data));
+
+        return $data;
     }
 
     public function livedata()
@@ -64,13 +76,12 @@ class PageController extends Controller
             $dat = new stdClass();
             $dat->id = $c->id;
             $dat->data = $c->data;
-            $dat->location = $c->location; 
+            $dat->location = $c->location;
             $data->add($dat);
         }
 
-        
-        return $data;        
-        //return view('livefeed.index', compact('data'));
+
+        return $data;
     }
 
 }

@@ -10,20 +10,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class LocationUpdate implements ShouldBroadcast
+class MapAntennaUpdate implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $location;
+    public $maplocation;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($location)
+    public function __construct($maplocation)
     {
-        $this->location = $location;
+        $this->maplocation = $maplocation;
     }
 
     /**
@@ -33,18 +33,15 @@ class LocationUpdate implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('LocationChannel');
+        return new PrivateChannel('MapLocationChannel');
     }
 
     public function broadcastWith()
     {
         return [
-            'id' => $this->location->id,
-            'Location' => $this->location->Location,
-            'TagID' => $this->location->TagID,
-            'VIN' => $this->location->VIN,
-            'Latitude' => $this->location->Latitude,
-            'Longitude' => $this->location->Longitude
+            'Latitude' => $this->maplocation->latitude,
+            'Longitude' => $this->maplocation->longitude,
+            'Status' => $this->maplocation->status
         ];
     }
 }

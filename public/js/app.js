@@ -4947,6 +4947,205 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AntennaComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AntennaComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    //Hold Data as an Array of [Latitude, Longitud]
+    return {
+      coordinates: [],
+      infoWindowOptions: {
+        width: 0,
+        height: -35
+      },
+      activeAntenna: {},
+      infoWindowOpened: false,
+      infoContent: "",
+      infoWinOpen: false,
+      currentMidx: null,
+      infoOptions: {
+        pixelOffset: {
+          width: 0,
+          height: -35
+        }
+      },
+      data: []
+    };
+  },
+  assetscoordinates: function assetscoordinates() {
+    //Hold Data as an Array of [Latitude, Longitud]
+    return {
+      coordinates_assets: []
+    };
+  },
+  markers: function markers() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              //Will run when the Vue cycle starts
+              axios.get("assets").then(function (a) {
+                _this.coordinates_assets = a.assetscoordinates;
+              });
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  methods: {
+    fetchData: function fetchData() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var _yield$axios$get, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios.get("antennasmap");
+
+              case 3:
+                _yield$axios$get = _context2.sent;
+                data = _yield$axios$get.data;
+                console.log(data);
+
+                _this2.data.push(data);
+
+                _context2.next = 12;
+                break;
+
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](0);
+                console.log("error fetching antennasmap");
+
+              case 12:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 9]]);
+      }))();
+    },
+    getPosition: function getPosition(c) {
+      //Get position from Array
+      return {
+        lat: parseFloat(c.latitude),
+        lng: parseFloat(c.longitude)
+      };
+    },
+    setPosition: function setPosition(a) {
+      //Will set the position of the asset from an Array
+      return {
+        lat: parseFloat(a.latitude),
+        lng: parseFloat(a.longitude)
+      };
+    }
+  },
+  computed: {
+    mapCenter: function mapCenter() {
+      if (!this.coordinates.lenght) {
+        //This becomes the center of the Map if theres no markers close,
+        return {
+          //this will be used when an alert is filled and we are looking for an asset
+          lat: 19.450245,
+          lng: -70.686466
+        };
+      }
+
+      return {
+        //This uses the first coordinates in the array to use as center.
+        lat: parseFloat(this.coordinates[0].latitude),
+        lng: parseFloat(this.coordinates[0].longitude)
+      };
+    },
+    infoWindowPosition: function infoWindowPosition() {
+      return {
+        lat: parseFloat(this.activeAntenna.latitude),
+        lng: parseFloat(this.activeAntenna.longitude)
+      };
+    }
+  },
+  created: function created() {
+    var _this3 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return _this3.fetchData();
+
+            case 2:
+              Echo["private"]("MapLocationChannel").listen("MapAntennaUpdate", function (x) {
+                console.log("Antena mapa");
+                console.log(x);
+
+                _this3.data.push(x);
+              });
+
+            case 3:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -5171,6 +5370,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     //Hold Data as an Array of [Latitude, Longitud]
@@ -5359,7 +5561,8 @@ alpinejs__WEBPACK_IMPORTED_MODULE_0__.default.start();
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
 Vue.component('map-component', __webpack_require__(/*! ./components/MapComponent.vue */ "./resources/js/components/MapComponent.vue").default);
-Vue.component('livedata-component', __webpack_require__(/*! ./components/LivedataComponent.vue */ "./resources/js/components/LivedataComponent.vue").default); // const files = require.context('./', true, /\.vue$/i)
+Vue.component('livedata-component', __webpack_require__(/*! ./components/LivedataComponent.vue */ "./resources/js/components/LivedataComponent.vue").default);
+Vue.component('antenna-component', __webpack_require__(/*! ./components/AntennaComponent.vue */ "./resources/js/components/AntennaComponent.vue").default); // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_2__, {
@@ -30639,6 +30842,45 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AntennaComponent.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/AntennaComponent.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AntennaComponent_vue_vue_type_template_id_05e079b6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AntennaComponent.vue?vue&type=template&id=05e079b6& */ "./resources/js/components/AntennaComponent.vue?vue&type=template&id=05e079b6&");
+/* harmony import */ var _AntennaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AntennaComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/AntennaComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _AntennaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _AntennaComponent_vue_vue_type_template_id_05e079b6___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AntennaComponent_vue_vue_type_template_id_05e079b6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AntennaComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue ***!
@@ -30753,6 +30995,22 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 if (false) { var api; }
 component.options.__file = "resources/js/components/MapComponent.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AntennaComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/AntennaComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AntennaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AntennaComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AntennaComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AntennaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -30975,6 +31233,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_streetViewPanorama_vue_vue_type_template_id_ed35740a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_streetViewPanorama_vue_vue_type_template_id_ed35740a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../vue-loader/lib/index.js??vue-loader-options!./streetViewPanorama.vue?vue&type=template&id=ed35740a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/vue2-google-maps/dist/components/streetViewPanorama.vue?vue&type=template&id=ed35740a&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/AntennaComponent.vue?vue&type=template&id=05e079b6&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/AntennaComponent.vue?vue&type=template&id=05e079b6& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AntennaComponent_vue_vue_type_template_id_05e079b6___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AntennaComponent_vue_vue_type_template_id_05e079b6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AntennaComponent_vue_vue_type_template_id_05e079b6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AntennaComponent.vue?vue&type=template&id=05e079b6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AntennaComponent.vue?vue&type=template&id=05e079b6&");
 
 
 /***/ }),
@@ -31206,6 +31481,70 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AntennaComponent.vue?vue&type=template&id=05e079b6&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AntennaComponent.vue?vue&type=template&id=05e079b6& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "antennamap" },
+    [
+      _c(
+        "gmap-map",
+        {
+          staticStyle: { width: "100%", height: "550px" },
+          attrs: { center: _vm.mapCenter, zoom: 13 }
+        },
+        _vm._l(_vm.data, function(d) {
+          return _c(
+            "gmap-marker",
+            {
+              key: d.id,
+              attrs: {
+                position: { lat: d.Latitude, lng: d.Longitude },
+                draggable: false
+              }
+            },
+            [
+              _c("GmapInfoWindow", [
+                _c("div", [
+                  _c("strong", [_vm._v("Ubicación:")]),
+                  _vm._v(" " + _vm._s(d.Location))
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("strong", [_vm._v("Estatus:" + _vm._s(d.Status))])
+                ])
+              ])
+            ],
+            1
+          )
+        }),
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
@@ -31305,7 +31644,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      " \n                " +
+                      "\n                " +
                         _vm._s(d.data ? d.data.macAddress : d.data) +
                         "\n                "
                     )
@@ -31357,7 +31696,7 @@ var staticRenderFns = [
               "px-6 py-3 text-xs font-bold tracking-wider text-center text-gray-500 uppercase bg-gray-50",
             attrs: { scope: "col" }
           },
-          [_vm._v("\n                Mac Address\n            ")]
+          [_vm._v("\n                Tag ID\n            ")]
         ),
         _vm._v(" "),
         _c(
@@ -31417,10 +31756,20 @@ var render = function() {
             },
             [
               _c("GmapInfoWindow", [
-                _c("div", [_c("strong", [_vm._v("TAG:" + _vm._s(d.TagID))])]),
+                _c("div", [
+                  _c("strong", [_vm._v("Placa:" + _vm._s(d.LicensePlate))])
+                ]),
+                _vm._v(" "),
+                _c("div", [_c("strong", [_vm._v("Marca:" + _vm._s(d.Make))])]),
                 _vm._v(" "),
                 _c("div", [
-                  _c("strong", [_vm._v("Location:")]),
+                  _c("strong", [_vm._v("Modelo:" + _vm._s(d.Model))])
+                ]),
+                _vm._v(" "),
+                _c("div", [_c("strong", [_vm._v("Color:" + _vm._s(d.Color))])]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("strong", [_vm._v("Ubicación:")]),
                   _vm._v(" " + _vm._s(d.Location))
                 ])
               ])

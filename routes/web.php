@@ -50,6 +50,7 @@ Route::resource('users', UserController::class);*/
 //Route::get('/map', [PageController::class, 'markers']); FUNCIONA, TRAE LOS LOCATIONS A MARCAR EN MAPA
 Route::get('/map', [LiveFeedController::class, 'dataLocation']);
 Route::get('/live', [PageController::class, 'livedata']);
+Route::get('/antennasmap', [PageController::class, 'mapAntenna']);
 
 
 Route::get('/live/data', [LiveFeedController::class, 'data']);

@@ -17,6 +17,9 @@ class CreateLocationsTable extends Migration
             $table->id();
             $table->string('Location');
             $table->char('TagID');
+            $table->char('VIN');
+            $table->char('LicensePlate');
+            $table->string('Owner', 500);
             $table->float('Latitude', 18, 15);
             $table->float('Longitude', 18, 15);
             $table->timestamps();

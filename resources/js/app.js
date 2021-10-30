@@ -14,6 +14,7 @@ window.Vue = require('vue').default;
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('map-component', require('./components/MapComponent.vue').default);
 Vue.component('livedata-component', require('./components/LivedataComponent.vue').default);
+Vue.component('antenna-component', require('./components/AntennaComponent.vue').default);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 

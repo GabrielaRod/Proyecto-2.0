@@ -1,36 +1,21 @@
 <template>
-    <div class="maptrack">
+    <div class="antennamap">
         <gmap-map
             :center="mapCenter"
             :zoom="13"
             style="width: 100%; height: 550px;"
-        >
-            <!--  <gmap-marker  //FUNCIONA, ASIGNA LAT, LON AL MAPA
-                v-for="c in coordinates"
-                :key="c.id"
-                :position="getPosition(c)"
-                :draggable="false"
-            ></gmap-marker> -->
+            >
             <gmap-marker
                 v-for="d in data"
                 :key="d.id"
-                :position="{ lat: d.Latitude, lng: d.Longitude }"
+                :position="{ lat: d.latitude, lng: d.longitude }"
                 :draggable="false"
-            >
+                >
                 <GmapInfoWindow>
-                    <div><strong>Placa:{{ d.LicensePlate }}</strong></div>
-                    <div><strong>Marca:{{ d.Make }}</strong></div>
-                    <div><strong>Modelo:{{ d.Model }}</strong></div>
-                    <div><strong>Color:{{ d.Color }}</strong></div>
                     <div><strong>Ubicación:</strong> {{ d.Location }}</div>
+                    <div><strong>Estatus:{{ d.status }}</strong></div>
                 </GmapInfoWindow>
             </gmap-marker>
-            <!--  <gmap-marker
-                v-for="a in coordinates_assets"
-                :key="a.id"
-                :position="setPosition(a)"
-                :draggable="false"
-            ></gmap-marker> -->
         </gmap-map>
     </div>
 </template>
@@ -50,7 +35,6 @@ export default {
             infoContent: "",
             infoWinOpen: false,
             currentMidx: null,
-            //optional: offset infowindow so it visually sits nicely on top of our marker
             infoOptions: {
                 pixelOffset: {
                     width: 0,
@@ -66,12 +50,6 @@ export default {
             coordinates_assets: []
         };
     },
-    /*  async created() {
-        //Will run when the Vue cycle starts
-        axios.get("map").then(c => {
-            this.coordinates = c.data;
-        });
-    }, */
 
     async markers() {
         //Will run when the Vue cycle starts
@@ -83,11 +61,11 @@ export default {
     methods: {
         async fetchData() {
             try {
-                const { data } = await axios.get("map");
+                const { data } = await axios.get("antennasmap");
                 console.log(data);
                 this.data.push(data);
             } catch {
-                console.log("error fetching map");
+                console.log("error fetching antennasmap");
             }
         },
 
@@ -131,8 +109,8 @@ export default {
     },
     async created() {
         await this.fetchData();
-        Echo.private("LocationChannel").listen("LocationUpdate", x => {
-            console.log("Cosa mapa");
+        Echo.private("MapLocationChannel").listen("MapAntennaUpdate", x => {
+            console.log("Antena mapa");
             console.log(x);
             this.data.push(x);
         });

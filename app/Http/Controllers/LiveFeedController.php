@@ -108,7 +108,7 @@ class LiveFeedController extends Controller
         return response()->json($location);
     }
 
-    public function prueba($macAddress, $coordinateid)
+    public function prueba($macAddress, $coordinateid, $VIN)
     {
         $datetime = Carbon::now()->subMinutes(1)->toDateTimeString();
 
@@ -130,6 +130,7 @@ class LiveFeedController extends Controller
 
             $data->Location = $locationinfo->Location;
             $data->TagID = $macAddress;
+            $data->VIN = $VIN;
             $data->Latitude = $locationinfo->Latitude;
             $data->Longitude = $locationinfo->Longitude;
 
@@ -137,7 +138,7 @@ class LiveFeedController extends Controller
 
             $location = DB::table('locations')
                 ->where('locations.id', $data->id)
-                ->select('locations.id', 'locations.Location', 'locations.TagID', 'locations.Latitude', 'locations.Longitude')
+                ->select('locations.id', 'locations.Location', 'locations.TagID' , 'locations.VIN', 'locations.Latitude', 'locations.Longitude')
                 ->first();
 
             broadcast(new LocationUpdate($location));
@@ -169,8 +170,10 @@ class LiveFeedController extends Controller
             ->where('reports.VIN', $VIN->VIN)
             ->exists();
 
+        $matricula = $VIN->VIN;
+
         if ($exists == true) {
-            return $this->prueba($macAddress, $coordinateid);
+            return $this->prueba($macAddress, $coordinateid, $matricula);
         } else {
             return "pepe1";
         }

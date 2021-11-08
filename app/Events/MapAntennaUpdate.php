@@ -38,10 +38,12 @@ class MapAntennaUpdate implements ShouldBroadcast
 
     public function broadcastWith()
     {
+
         return [
-            'Latitude' => $this->maplocation->latitude,
-            'Longitude' => $this->maplocation->longitude,
-            'Status' => $this->maplocation->status
+            'latitude' => $this->maplocation->latitude,
+            'longitude' => $this->maplocation->longitude,
+            'status' => $this->maplocation->status
         ];
+
     }
 }

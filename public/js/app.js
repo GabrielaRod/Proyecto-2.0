@@ -4987,7 +4987,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     //Hold Data as an Array of [Latitude, Longitud]
@@ -31513,19 +31512,14 @@ var render = function() {
             {
               key: d.id,
               attrs: {
-                position: { lat: d.Latitude, lng: d.Longitude },
+                position: { lat: d.latitude, lng: d.longitude },
                 draggable: false
               }
             },
             [
               _c("GmapInfoWindow", [
                 _c("div", [
-                  _c("strong", [_vm._v("Ubicación:")]),
-                  _vm._v(" " + _vm._s(d.Location))
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("strong", [_vm._v("Estatus:" + _vm._s(d.Status))])
+                  _c("strong", [_vm._v("Estatus:" + _vm._s(d.status))])
                 ])
               ])
             ],

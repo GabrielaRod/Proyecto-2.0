@@ -12,7 +12,6 @@
                 :draggable="false"
                 >
                 <GmapInfoWindow>
-                    <div><strong>Ubicación:</strong> {{ d.Location }}</div>
                     <div><strong>Estatus:{{ d.status }}</strong></div>
                 </GmapInfoWindow>
             </gmap-marker>

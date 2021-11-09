@@ -22,10 +22,10 @@ class TagFactory extends Factory
      */
     public function definition()
     {
-        return [ 
+        return [
             'Tag' => $this->faker->macAddress,
-            'vehicle_id' => rand(1,8),
-    
+            'vehicle_id' => rand(1,5),
+
         ];
     }
 }

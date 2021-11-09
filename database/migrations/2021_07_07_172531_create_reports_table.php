@@ -15,14 +15,15 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id()->unique();
-            $table->char('VIN'); 
+            $table->char('VIN');
+            $table->char('LicensePlate');
             $table->string('Make');
             $table->string('Model');
             $table->string('Color');
             $table->string('FirstName');
             $table->string('LastName');
             $table->char('Email');
-            $table->enum('Status', ['ACTIVE','INACTIVE'])->default('ACTIVE');            
+            $table->enum('Status', ['ACTIVE','INACTIVE'])->default('ACTIVE');
             $table->timestamps();
         });
     }

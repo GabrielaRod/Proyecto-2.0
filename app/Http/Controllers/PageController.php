@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use stdClass;
 use App\Events\LiveFeedUpdate;
 
+
 class PageController extends Controller
 {
     public function markers()
@@ -21,8 +22,8 @@ class PageController extends Controller
         /* TODO: PROBAR CON LA TABLA LOCATIONS PARA SOLO PRESENTAR ALGUN VIN QUE TENGA COMO STATUS ACTIVO EN TABLA REPORTS */
 
         $coordinates = DB::table('locations')
-                        ->select('locations.latitude', 'locations.longitude', 'locations.TagID')
-                        ->get();
+            ->select('locations.latitude', 'locations.longitude', 'locations.TagID')
+            ->get();
 
         foreach ($coordinates as $c) {
             $marker = new stdClass();
@@ -41,11 +42,11 @@ class PageController extends Controller
         $maplocation = collect();
 
         $coordinates = DB::table('antennas')
-                        ->join('coordinates', 'coordinates.id', '=', 'antennas.coordinate_id')
-                        ->select('coordinates.latitude', 'coordinates.longitude', 'antennas.status')
-                        ->first();
+            ->join('coordinates', 'coordinates.id', '=', 'antennas.coordinate_id')
+            ->select('coordinates.latitude', 'coordinates.longitude', 'antennas.status')
+            ->first();
 
-                  /*  foreach ($coordinates as $c) {
+        /*  foreach ($coordinates as $c) {
                     $dat = new stdClass();
                     $dat->Latitude = $c->latitude;
                     $dat->Longitude = $c->longitude;
@@ -53,8 +54,8 @@ class PageController extends Controller
                     $maplocation->add($dat);
                 }*/
 
-        return $coordinates;
 
+        return $coordinates;
     }
 
     public function livedata()
@@ -65,9 +66,9 @@ class PageController extends Controller
         /* TODO: PROBAR CON LA TABLA LOCATIONS PARA SOLO PRESENTAR ALGUN VIN QUE TENGA COMO STATUS ACTIVO EN TABLA REPORTS */
 
         $locations = DB::table('livefeed')
-                    ->join('coordinates', 'coordinates.id', '=', 'livefeed.location_id')
-                    ->select('livefeed.id', 'livefeed.data', 'coordinates.location')
-                    ->get();
+            ->join('coordinates', 'coordinates.id', '=', 'livefeed.location_id')
+            ->select('livefeed.id', 'livefeed.data', 'coordinates.location')
+            ->get();
 
         foreach ($locations as $c) {
             $dat = new stdClass();
@@ -80,5 +81,4 @@ class PageController extends Controller
 
         return $data;
     }
-
 }

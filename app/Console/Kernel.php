@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -25,6 +26,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        $schedule->command('change:status') //En vez de anual, se envia cada 6 meses de forma que no sea personalizado por usuario.
+            ->everyMinute();
+
+
+        $schedule->command('email:yearly') //En vez de anual, se envia cada 6 meses de forma que no sea personalizado por usuario.
+            ->quarterly();
     }
 
     /**
@@ -34,7 +42,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

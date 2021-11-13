@@ -4,6 +4,7 @@ import Alpine from 'alpinejs';
 import axios from 'axios';
 import * as VueGoogleMaps from 'vue2-google-maps';
 
+
 window.Alpine = Alpine;
 
 Alpine.start();

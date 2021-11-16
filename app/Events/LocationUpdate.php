@@ -42,7 +42,6 @@ class LocationUpdate implements ShouldBroadcast
             'id' => $this->location->id,
             'Location' => $this->location->Location,
             'TagID' => $this->location->TagID,
-            'VIN' => $this->location->VIN,
             'Latitude' => $this->location->Latitude,
             'Longitude' => $this->location->Longitude
         ];

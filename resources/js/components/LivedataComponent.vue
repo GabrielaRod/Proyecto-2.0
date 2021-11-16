@@ -65,7 +65,7 @@ export default {
     async created() {
         await this.fetchData();
         Echo.private("LiveFeedChannel").listen("LiveFeedUpdate", e => {
-            console.log("listening cosa");
+            //console.log("listening cosa");
             console.log(e);
             this.data.push({
                 id: e.id,

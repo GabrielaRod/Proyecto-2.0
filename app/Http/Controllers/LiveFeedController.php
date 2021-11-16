@@ -7,6 +7,7 @@ use App\Events\LocationUpdate;
 use Illuminate\Http\Request;
 use App\Models\LiveFeed;
 use App\Models\Location;
+use App\Models\AppUser;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
@@ -98,6 +99,61 @@ class LiveFeedController extends Controller
     // }
 
 
+    public function sendWebNotification($title, $body, $token)
+    {
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $FcmToken = $token;
+        $serverKey = 'AAAAyHwBLgg:APA91bED7eNOTND63C5o37peGrBRxVhP8zkqxdAOjV37NhSRcXQ1toyU5SUELROBMB9_3RTyd-mQAlq2Jd2_82VNjY-muBdSA0BxuJDWd4ldTynmyPee3z2buyqAbawDOnpKtnMwNrsf';
+
+
+        $fields = array();
+        $fields['priority'] = "high";
+        $fields['notification'] = [
+            "title" => $title,
+            "body" => $body,
+            'data' => ['message' => $body],
+            "sound" => "default"
+        ];
+        if (is_array($FcmToken)) {
+            $fields['registration_ids'] = $FcmToken;
+        } else {
+            $fields['to'] = $FcmToken;
+        }
+
+        $encodedData = json_encode($fields);
+
+        $headers = [
+            'Authorization:key=' . $serverKey,
+            'Content-Type: application/json',
+        ];
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        // Disabling SSL Certificate support temporarly
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
+
+        // Execute post
+        $result = curl_exec($ch);
+
+        if ($result === FALSE) {
+            die('Curl failed: ' . curl_error($ch));
+        }
+
+        // Close connection
+        curl_close($ch);
+
+        return $result;
+        // FCM response
+        //dd($result);
+    }
+
     public function dataLocation()
     {
         $location = DB::table('locations')
@@ -108,7 +164,7 @@ class LiveFeedController extends Controller
         return response()->json($location);
     }
 
-    public function prueba($macAddress, $coordinateid, $VIN)
+    public function sendData($macAddress, $coordinateid, $VIN, $Token)
     {
         $datetime = Carbon::now()->subMinutes(1)->toDateTimeString();
 
@@ -126,11 +182,13 @@ class LiveFeedController extends Controller
             return null;
         } else {
             Log::info('This is some useful information.');
+
             $data = new Location();
+            $Title = 'AssetTracker';
+            $Body = 'Visto en ' . $locationinfo->Location;
 
             $data->Location = $locationinfo->Location;
             $data->TagID = $macAddress;
-            $data->VIN = $VIN;
             $data->Latitude = $locationinfo->Latitude;
             $data->Longitude = $locationinfo->Longitude;
 
@@ -138,10 +196,12 @@ class LiveFeedController extends Controller
 
             $location = DB::table('locations')
                 ->where('locations.id', $data->id)
-                ->select('locations.id', 'locations.Location', 'locations.TagID' , 'locations.VIN', 'locations.Latitude', 'locations.Longitude')
+                ->select('locations.id', 'locations.Location', 'locations.TagID', 'locations.Latitude', 'locations.Longitude')
                 ->first();
 
             broadcast(new LocationUpdate($location));
+
+            $this->sendWebNotification($Title, $Body, $Token);
 
             return $location;
         }
@@ -172,8 +232,16 @@ class LiveFeedController extends Controller
 
         $matricula = $VIN->VIN;
 
+        $token = DB::table('vehicles')
+            ->join('app_users', 'app_users.id', '=', 'vehicles.app_user_id')
+            ->where('vehicles.id', $vehicle_id->vehicle_id)
+            ->select('app_users.Token')
+            ->get();
+
+        $fmctoken = $token[0]->Token;
+
         if ($exists == true) {
-            return $this->prueba($macAddress, $coordinateid, $matricula);
+            return $this->sendData($macAddress, $coordinateid, $matricula, $fmctoken);
         } else {
             return "pepe1";
         }

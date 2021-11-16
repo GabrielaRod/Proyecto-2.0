@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('change:status') //En vez de anual, se envia cada 6 meses de forma que no sea personalizado por usuario.
-            ->everyMinute();
+        $schedule->command('change:status') //Cada 30 minutos hace un chequeo de todas las antenas
+            ->everyThirtyMinutes();
 
 
         $schedule->command('email:yearly') //En vez de anual, se envia cada 6 meses de forma que no sea personalizado por usuario.

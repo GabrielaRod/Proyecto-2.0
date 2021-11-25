@@ -167,9 +167,19 @@ class LiveFeedController extends Controller
 
             $data->save();
 
+            /*
             $location = DB::table('locations')
                 ->where('locations.id', $data->id)
                 ->select('locations.id', 'locations.Location', 'locations.TagID', 'locations.Latitude', 'locations.Longitude')
+                ->first();
+            */
+
+            $location = DB::table('tags')
+                ->join('locations', 'locations.TagID', '=', 'tags.Tag')
+                ->join('vehicles', 'vehicles.id', '=', 'tags.vehicle_id')
+                ->where('locations.id', $data->id)
+                ->orderByDesc('locations.id')
+                ->select('locations.id', 'locations.Location', 'locations.TagID', 'locations.Latitude', 'locations.Longitude', 'vehicles.LicensePlate', 'vehicles.Make', 'vehicles.Model', 'vehicles.Color')
                 ->first();
 
             broadcast(new LocationUpdate($location));

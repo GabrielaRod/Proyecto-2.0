@@ -4960,6 +4960,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue2_gmap_custom_marker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-gmap-custom-marker */ "./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -4985,7 +4986,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    "gmap-custom-marker": vue2_gmap_custom_marker__WEBPACK_IMPORTED_MODULE_1__.default
+  },
   data: function data() {
     //Hold Data as an Array of [Latitude, Longitud]
     return {
@@ -4995,7 +5019,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         height: -35
       },
       activeAntenna: {},
-      infoWindowOpened: false,
+      infoWindowOpened: true,
       infoContent: "",
       infoWinOpen: false,
       currentMidx: null,
@@ -5005,7 +5029,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           height: -35
         }
       },
-      data: []
+      data: [],
+      svgMarkerRed: {
+        path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+        fillColor: "red",
+        fillOpacity: 0.9,
+        strokeWeight: 0,
+        rotation: 0,
+        scale: 2 //anchor: new google.maps.Point(15, 30),
+
+      },
+      svgMarkerGreen: {
+        path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+        fillColor: "green",
+        fillOpacity: 0.9,
+        strokeWeight: 0,
+        rotation: 0,
+        scale: 2 //anchor: new google.maps.Point(15, 30),
+
+      }
     };
   },
   assetscoordinates: function assetscoordinates() {
@@ -5054,9 +5096,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _yield$axios$get = _context2.sent;
                 data = _yield$axios$get.data;
                 console.log(data);
-
-                _this2.data.push(data);
-
+                data.forEach(function (element) {
+                  _this2.data.push(element);
+                });
                 _context2.next = 12;
                 break;
 
@@ -5539,11 +5581,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-
 
 
 
@@ -5556,7 +5595,7 @@ Vue.component('livedata-component', __webpack_require__(/*! ./components/Livedat
 Vue.component('antenna-component', __webpack_require__(/*! ./components/AntennaComponent.vue */ "./resources/js/components/AntennaComponent.vue").default); // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_2__, {
+Vue.use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__, {
   load: {
     key: '',
     autobindAllEvents: true,
@@ -30529,6 +30568,266 @@ module.exports = function (list, options) {
 
 /***/ }),
 
+/***/ "./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue":
+/*!*********************************************************************!*\
+  !*** ./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _gmap_custom_marker_vue_vue_type_template_id_41712756___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gmap-custom-marker.vue?vue&type=template&id=41712756& */ "./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=template&id=41712756&");
+/* harmony import */ var _gmap_custom_marker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gmap-custom-marker.vue?vue&type=script&lang=js& */ "./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=script&lang=js&");
+/* harmony import */ var _vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _gmap_custom_marker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _gmap_custom_marker_vue_vue_type_template_id_41712756___WEBPACK_IMPORTED_MODULE_0__.render,
+  _gmap_custom_marker_vue_vue_type_template_id_41712756___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  mixins: [vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__.MapElementMixin],
+  props: {
+    marker: {
+      type: Object,
+      default: undefined
+    },
+    offsetX: {
+      type: Number,
+      default: 0
+    },
+    offsetY: {
+      type: Number,
+      default: 0
+    },
+    alignment: {
+      type: String,
+      default: "top"
+    },
+    zIndex: {
+      type: Number,
+      default: 50
+    },
+    cssPosition: {
+      type: Boolean,
+      default: false
+    }
+  },
+  inject: {
+    $clusterPromise: {
+      default: null
+    }
+  },
+  beforeCreate(options) {
+    if (this.$clusterPromise) {
+      options.map = null;
+    }
+
+    return this.$clusterPromise;
+  },
+  methods: {
+    afterCreate(inst) {
+      if (this.$clusterPromise && !this.isMarkerAdded) {
+        this.$clusterPromise.then(co => {
+          co.addMarker(inst);
+          this.$clusterObject = co;
+          this.isMarkerAdded = true;
+        });
+      }
+    }
+  },
+  data() {
+    return {
+      opacity: 0.01
+    };
+  },
+  watch: {
+    marker(val) {
+      this.$mapPromise.then(map => this.$overlay.setPosition());
+    },
+    zIndex(val) {
+      if (this.$overlay) {
+        this.$overlay.repaint()
+      }
+    }
+  },
+  provide() {
+    const self = this;
+    return this.$mapPromise.then(map => {
+      class Overlay extends google.maps.OverlayView {
+        constructor(map) {
+          super();
+          this.setMap(map);
+          this.draw = () => this.repaint();
+          this.setPosition = () => this.repaint();
+        }
+        repaint() {
+          const div = self.$el;
+          const projection = this.getProjection();
+          if (projection && div) {
+            const posPixel = projection.fromLatLngToDivPixel(self.latLng);
+            let x, y;
+            switch (self.alignment) {
+              case "top":
+                x = posPixel.x - div.offsetWidth / 2;
+                y = posPixel.y - div.offsetHeight;
+                break;
+              case "bottom":
+                x = posPixel.x - div.offsetWidth / 2;
+                y = posPixel.y;
+                break;
+              case "left":
+                x = posPixel.x - div.offsetWidth;
+                y = posPixel.y - div.offsetHeight / 2;
+                break;
+              case "right":
+                x = posPixel.x;
+                y = posPixel.y - div.offsetHeight / 2;
+                break;
+              case "center":
+                x = posPixel.x - div.offsetWidth / 2;
+                y = posPixel.y - div.offsetHeight / 2;
+                break;
+              case "topleft":
+              case "lefttop":
+                x = posPixel.x - div.offsetWidth;
+                y = posPixel.y - div.offsetHeight;
+                break;
+              case "topright":
+              case "righttop":
+                x = posPixel.x;
+                y = posPixel.y - div.offsetHeight;
+                break;
+              case "bottomleft":
+              case "leftop":
+                x = posPixel.x - div.offsetWidth;
+                y = posPixel.y;
+                break;
+              case "bottomright":
+              case "rightbottom":
+                x = posPixel.x;
+                y = posPixel.y;
+                break;
+              default:
+                throw new Error("Invalid alignment type of custom marker!");
+                break;
+            }
+            if (self.cssPosition) {
+              div.style.transform = `translate(${x + self.offsetX}px, ${y + self.offsetY}px)`;
+            } else {
+              div.style.left = x + self.offsetX + "px";
+              div.style.top = y + self.offsetY + "px";
+            }
+            div.style["z-index"] = self.zIndex;
+          }
+        }
+        onAdd() {
+          const div = self.$el;
+          const panes = this.getPanes();
+          div.style.position = "absolute";
+          div.style.display = "inline-block";
+          div.style.zIndex = self.zIndex;
+          panes.overlayLayer.appendChild(div);
+          panes.overlayMouseTarget.appendChild(div);
+          this.getDraggable = () => false;
+          this.getPosition = () => {
+            return new google.maps.LatLng(self.lat, self.lng);
+          };
+          self.afterCreate(this);
+        }
+        onRemove() {
+          if (self.$el) {
+            const ua = window.navigator.userAgent
+            const msie = ua.indexOf("MSIE ")
+            if (msie > 0 || !!ua.match(/Trident.*rv\:11\./)) {
+              self.$el.parentNode.removeChild(self.$el)
+            } else {
+              self.$el.remove();
+            }
+          }
+        }
+      }
+      this.$overlay = new Overlay(map);
+      setTimeout(() => {
+          if (this.$overlay) {
+            this.$overlay.repaint();
+            this.opacity = 1;
+          }
+      }, 100);
+    });
+  },
+  computed: {
+    lat() {
+      return parseFloat(
+        isNaN(this.marker.lat) ? this.marker.latitude : this.marker.lat
+      );
+    },
+    lng() {
+      return parseFloat(
+        isNaN(this.marker.lng) ? this.marker.longitude : this.marker.lng
+      );
+    },
+    latLng() {
+      if (this.marker instanceof google.maps.LatLng) {
+          return this.marker;
+      }
+      return new google.maps.LatLng(this.lat, this.lng);
+    }
+  },
+  destroyed() {
+     if (this.$clusterObject) {
+      this.$clusterObject.removeMarker(this.$overlay, true);
+    } else {
+      this.$overlay.setMap(null);
+      this.$overlay = undefined;
+    }
+  }
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/vue2-google-maps/dist/components/autocomplete.vue":
 /*!************************************************************************!*\
   !*** ./node_modules/vue2-google-maps/dist/components/autocomplete.vue ***!
@@ -31079,6 +31378,39 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _vue_loader_lib_index_js_vue_loader_options_gmap_custom_marker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../vue-loader/lib/index.js??vue-loader-options!./gmap-custom-marker.vue?vue&type=script&lang=js& */ "./node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_vue_loader_lib_index_js_vue_loader_options_gmap_custom_marker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=template&id=41712756&":
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=template&id=41712756& ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_gmap_custom_marker_vue_vue_type_template_id_41712756___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_gmap_custom_marker_vue_vue_type_template_id_41712756___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_gmap_custom_marker_vue_vue_type_template_id_41712756___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../vue-loader/lib/index.js??vue-loader-options!./gmap-custom-marker.vue?vue&type=template&id=41712756& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=template&id=41712756&");
+
+
+/***/ }),
+
 /***/ "./node_modules/vue2-google-maps/dist/components/autocomplete.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************!*\
   !*** ./node_modules/vue2-google-maps/dist/components/autocomplete.vue?vue&type=script&lang=js& ***!
@@ -31313,6 +31645,31 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=template&id=41712756&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue?vue&type=template&id=41712756& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { style: { opacity: _vm.opacity } }, [_vm._t("default")], 2)
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/vue2-google-maps/dist/components/autocomplete.vue?vue&type=template&id=2c922d06&":
 /*!**********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/vue2-google-maps/dist/components/autocomplete.vue?vue&type=template&id=2c922d06& ***!
@@ -31500,19 +31857,34 @@ var render = function() {
         },
         _vm._l(_vm.data, function(d) {
           return _c(
-            "gmap-marker",
+            "gmap-custom-marker",
             {
               key: d.id,
-              attrs: { position: _vm.setPosition(d), draggable: false }
+              attrs: { marker: { lat: d.latitude, lng: d.longitude } }
             },
             [
-              _c("GmapInfoWindow", [
-                _c("div", [
-                  _c("strong", [_vm._v("Estatus:" + _vm._s(d.status))])
-                ])
-              ])
-            ],
-            1
+              _c(
+                "svg",
+                {
+                  staticStyle: { width: "30px", height: "35px" },
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 20 20",
+                    fill: d.status == "INACTIVE" ? "red" : "green"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      "fill-rule": "evenodd",
+                      d:
+                        "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+                      "clip-rule": "evenodd"
+                    }
+                  })
+                ]
+              )
+            ]
           )
         }),
         1

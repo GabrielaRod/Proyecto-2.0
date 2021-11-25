@@ -52,5 +52,8 @@ Route::get('/map', [LiveFeedController::class, 'dataLocation']);
 Route::get('/live', [PageController::class, 'livedata']);
 Route::get('/antennasmap', [PageController::class, 'mapAntenna']);
 
+Route::get('/mapAntenna', function () {
+    return view('antennas.map');
+})->name('antennas.map');
 
 Route::get('/live/data', [LiveFeedController::class, 'data']);

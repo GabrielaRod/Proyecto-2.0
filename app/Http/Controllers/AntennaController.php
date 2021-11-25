@@ -26,6 +26,12 @@ class AntennaController extends Controller
         return view('antennas.index', compact('antennas'));
     }
 
+    public function map()
+    {
+        abort_if(Gate::denies('antenna_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return view('antennas.map');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -50,7 +56,7 @@ class AntennaController extends Controller
      */
     public function store(StoreAntennaRequest $request)
     {
-        $antenna= Antenna::create($request->validated());
+        $antenna = Antenna::create($request->validated());
         $antenna->coordinates()->sync($request->input('coordinate_id', []));
 
         return redirect()->route('antennas.index');

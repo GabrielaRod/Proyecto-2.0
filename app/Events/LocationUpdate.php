@@ -43,7 +43,11 @@ class LocationUpdate implements ShouldBroadcast
             'Location' => $this->location->Location,
             'TagID' => $this->location->TagID,
             'Latitude' => $this->location->Latitude,
-            'Longitude' => $this->location->Longitude
+            'Longitude' => $this->location->Longitude,
+            'LicensePlate' => $this->location->LicensePlate,
+            'Make' => $this->location->Make,
+            'Model' => $this->location->Model,
+            'Color' => $this->location->Color
         ];
     }
 }

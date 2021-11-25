@@ -69,35 +69,6 @@ class LiveFeedController extends Controller
         return response()->json($data);
     }
 
-    // //FUNCION QUE FUNCIONA PARA LLENAR LA TABLA LOCATIONS
-    // public function addLocation($macAddress, $coordinateid)
-    // {
-    //     $datetime = Carbon::now()->subMinutes(5)->toDateTimeString();
-
-    //     $locationinfo = DB::table('coordinates')
-    //         ->select('coordinates.*')
-    //         ->where('coordinates.id', $coordinateid)
-    //         ->first();
-
-    //     $exists = DB::table('locations')
-    //         ->where('locations.TagID', $macAddress)
-    //         ->where('created_at', '>=', $datetime)
-    //         ->exists();
-
-    //     if ($exists == true) {
-    //         return "pepe2";
-    //     } else {
-    //         $addlocation = DB::table('locations')
-    //             ->insert([
-    //                 'Location' => $locationinfo->Location,
-    //                 'TagID' => $macAddress,
-    //                 'Latitude' => $locationinfo->Latitude,
-    //                 'Longitude' => $locationinfo->Longitude
-    //             ]);
-    //         return $addlocation;
-    //     }
-    // }
-
 
     public function sendWebNotification($title, $body, $token)
     {
@@ -156,9 +127,11 @@ class LiveFeedController extends Controller
 
     public function dataLocation()
     {
-        $location = DB::table('locations')
+        $location = DB::table('tags')
+            ->join('locations', 'locations.TagID', '=', 'tags.Tag')
+            ->join('vehicles', 'vehicles.id', '=', 'tags.vehicle_id')
             ->orderByDesc('locations.id')
-            ->select('locations.id', 'locations.Location', 'locations.TagID', 'locations.Latitude', 'locations.Longitude')
+            ->select('locations.id', 'locations.Location', 'locations.TagID', 'locations.Latitude', 'locations.Longitude', 'vehicles.LicensePlate', 'vehicles.Make', 'vehicles.Model', 'vehicles.Color')
             ->first();
 
         return response()->json($location);

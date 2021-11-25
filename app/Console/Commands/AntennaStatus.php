@@ -4,7 +4,11 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use App\Events\MapAntennaUpdate;
 use Carbon\Carbon;
+use App\Models\Notification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AntennaStatus extends Command
 {
@@ -40,18 +44,41 @@ class AntennaStatus extends Command
     public function handle()
     {
         $datetime = Carbon::now()->subMinutes(30)->toDateTimeString();
+        $request = new Request();
 
-        $data = DB::table('livefeed')
+        $location = DB::table('livefeed')  //Checks for an antenna that hasnt read any tag in the last 30 minutes.
             ->select('livefeed.location_id')
             ->orderBy('created_at', 'asc')
             ->where('created_at', '<=', $datetime)
             ->first();
 
-        DB::table('antennas')
+        DB::table('antennas')               //Changes status to inactive to the antenna found in the previous query.
             ->select('antennas.Status')
-            ->where('antennas.coordinate_id', $data->location_id)
+            ->where('antennas.coordinate_id', $location->location_id)
             ->update(['Status' => 'INACTIVE']);
 
-        $this->info('Successfully changed antenna id ' . $data->location_id . ' status.');
+        $antenna = DB::table('antennas')    //Selects Location of the previously status changed antenna
+            ->join('coordinates', 'coordinates.id', '=', 'antennas.coordinate_id')
+            ->select('coordinates.Location')
+            ->where('antennas.coordinate_id', $location->location_id)
+            ->first();
+
+
+        $message = 'La antena ubicada en ' . $antenna->Location . ' presenta una avería.';
+
+        $notification = new Notification();
+        $notification->Message = $message;
+        $notification->Read = $request->boolean(false);
+
+        $notification->save();
+
+        $locationNotification = DB::table('notifications')
+            ->where('notifications.id', $notification->id)
+            ->select('notifications.id', 'notifications.Message', 'notifications.Read')
+            ->first();
+
+        broadcast(new MapAntennaUpdate($locationNotification));
+
+        $this->info('Successfully changed antenna id ' . $location->location_id . ' status to Inactive.');
     }
 }

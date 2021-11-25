@@ -4985,8 +4985,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     //Hold Data as an Array of [Latitude, Longitud]
@@ -5075,11 +5073,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2, null, [[0, 9]]);
       }))();
     },
-    getPosition: function getPosition(c) {
+    getPosition: function getPosition(data) {
       //Get position from Array
       return {
-        lat: parseFloat(c.latitude),
-        lng: parseFloat(c.longitude)
+        lat: parseFloat(data.latitude),
+        lng: parseFloat(data.longitude)
       };
     },
     setPosition: function setPosition(a) {
@@ -5294,7 +5292,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 2:
               Echo["private"]("LiveFeedChannel").listen("LiveFeedUpdate", function (e) {
-                console.log("listening cosa");
+                //console.log("listening cosa");
                 console.log(e);
 
                 _this2.data.push({
@@ -5366,12 +5364,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     //Hold Data as an Array of [Latitude, Longitud]
@@ -5404,11 +5396,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
 
   /*  async created() {
-      //Will run when the Vue cycle starts
-      axios.get("map").then(c => {
-          this.coordinates = c.data;
-      });
-  }, */
+        //Will run when the Vue cycle starts
+        axios.get("map").then(c => {
+            this.coordinates = c.data;
+        });
+    }, */
   markers: function markers() {
     var _this = this;
 
@@ -31511,10 +31503,7 @@ var render = function() {
             "gmap-marker",
             {
               key: d.id,
-              attrs: {
-                position: { lat: d.latitude, lng: d.longitude },
-                draggable: false
-              }
+              attrs: { position: _vm.setPosition(d), draggable: false }
             },
             [
               _c("GmapInfoWindow", [
@@ -31751,20 +31740,21 @@ var render = function() {
             [
               _c("GmapInfoWindow", [
                 _c("div", [
-                  _c("strong", [_vm._v("Placa:" + _vm._s(d.LicensePlate))])
+                  _c("strong", [_vm._v("Placa: " + _vm._s(d.LicensePlate))])
                 ]),
                 _vm._v(" "),
-                _c("div", [_c("strong", [_vm._v("Marca:" + _vm._s(d.Make))])]),
+                _c("div", [_c("strong", [_vm._v("Marca: " + _vm._s(d.Make))])]),
                 _vm._v(" "),
                 _c("div", [
-                  _c("strong", [_vm._v("Modelo:" + _vm._s(d.Model))])
+                  _c("strong", [_vm._v("Modelo: " + _vm._s(d.Model))])
                 ]),
                 _vm._v(" "),
-                _c("div", [_c("strong", [_vm._v("Color:" + _vm._s(d.Color))])]),
+                _c("div", [
+                  _c("strong", [_vm._v("Color: " + _vm._s(d.Color))])
+                ]),
                 _vm._v(" "),
                 _c("div", [
-                  _c("strong", [_vm._v("Ubicación:")]),
-                  _vm._v(" " + _vm._s(d.Location))
+                  _c("strong", [_vm._v("Ubicación: " + _vm._s(d.Location))])
                 ])
               ])
             ],

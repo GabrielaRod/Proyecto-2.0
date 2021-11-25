@@ -44,15 +44,16 @@ class PageController extends Controller
         $coordinates = DB::table('antennas')
             ->join('coordinates', 'coordinates.id', '=', 'antennas.coordinate_id')
             ->select('coordinates.latitude', 'coordinates.longitude', 'antennas.status')
-            ->first();
+            ->get();
 
-        /*  foreach ($coordinates as $c) {
-                    $dat = new stdClass();
-                    $dat->Latitude = $c->latitude;
-                    $dat->Longitude = $c->longitude;
-                    $dat->Status = $c->status;
-                    $maplocation->add($dat);
-                }*/
+        /*
+            foreach ($coordinates as $c) {
+            $dat = new stdClass();
+            $dat->latitude = $c->latitude;
+            $dat->longitude = $c->longitude;
+            $dat->status = $c->status;
+            $maplocation->add($dat);
+        }*/
 
 
         return $coordinates;

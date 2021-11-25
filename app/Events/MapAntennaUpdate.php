@@ -14,16 +14,16 @@ class MapAntennaUpdate implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $maplocation;
+    public $mapnotification;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($maplocation)
+    public function __construct($mapnotification)
     {
-        $this->maplocation = $maplocation;
+        $this->mapnotification = $mapnotification;
     }
 
     /**
@@ -40,10 +40,9 @@ class MapAntennaUpdate implements ShouldBroadcast
     {
 
         return [
-            'latitude' => $this->maplocation->latitude,
-            'longitude' => $this->maplocation->longitude,
-            'status' => $this->maplocation->status
+            'id' => $this->mapnotification->id,
+            'Message' => $this->mapnotification->Message,
+            'Read' => $this->mapnotification->Read
         ];
-
     }
 }

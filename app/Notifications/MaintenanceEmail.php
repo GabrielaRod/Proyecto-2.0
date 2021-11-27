@@ -4,10 +4,11 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class MaintenanceEmail extends Notification
+class MaintenanceEmail extends Mailable
 {
     use Queueable;
     private $maintenanceData;
@@ -40,6 +41,17 @@ class MaintenanceEmail extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
+    {
+        return (new MailMessage)
+            ->subject('Notificacion de Mantenimiento')
+            ->mailer('mantenimiento')
+            ->greeting('Hola!')
+            ->line($this->maintenanceData['body'])
+            ->line($this->maintenanceData['maintenanceText'])
+            ->line($this->maintenanceData['thankyou']);
+    }
+
+    public function build()
     {
         return (new MailMessage)
             ->subject('Notificacion de Mantenimiento')

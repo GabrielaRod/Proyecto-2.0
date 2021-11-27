@@ -126,6 +126,49 @@
                     </div>
                 @endif
 
+                {{-- Notifications --}}
+                <div class="flex justify-center h-screen">
+                    <div x-data="{ dropdownOpen: false }" class="relative my-32">
+                        <button @click="dropdownOpen = !dropdownOpen"
+                            class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+                            <span class="relative inline-flex rounded-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                    viewBox="0 0 24 24" stroke="grey">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                </svg>
+                                <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-800 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-800"></span>
+                                </span>
+                        </button>
+
+                        <div x-show="dropdownOpen" @click="dropdownOpen = false"
+                            class="fixed inset-0 h-full w-full z-10"></div>
+
+                        <div x-show="dropdownOpen"
+                            class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20"
+                            style="width:20rem; display:none">
+                            <div class="py-2">
+                                <?php $notifications = DB::select('select * from notifications'); ?>
+                                @foreach ($notifications as $notification)
+                                    <a href="{{ route('notifications.show', $notification->id) }}"
+                                        class=" flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
+                                        <p class="text-gray-600 text-sm mx-2">
+                                            <span class="font-bold" href="#">
+                                                {{ $notification->Message }}</span>
+                                        </p>
+                                    </a>
+                                @endforeach
+                            </div>
+                            <a href="{{ route('notifications.index') }}"
+                                class="block bg-gray-800 text-white text-center font-bold py-2">See all
+                                notifications</a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
@@ -162,10 +205,6 @@
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Perfil') }}
-                            </x-jet-dropdown-link>
-
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Notificaciones') }}
                             </x-jet-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

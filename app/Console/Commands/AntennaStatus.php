@@ -8,6 +8,7 @@ use App\Events\MapAntennaUpdate;
 use Carbon\Carbon;
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
 
 class AntennaStatus extends Command
@@ -46,6 +47,12 @@ class AntennaStatus extends Command
         $datetime = Carbon::now()->subMinutes(30)->toDateTimeString();
         $request = new Request();
 
+        $users = DB::table('users')
+            ->join('role_user', 'role_user.user_id', '=', 'users.id')
+            ->select('users.email')
+            ->where('role_user.role_id', '1')
+            ->get();
+
         $location = DB::table('livefeed')  //Checks for an antenna that hasnt read any tag in the last 30 minutes.
             ->select('livefeed.location_id')
             ->orderBy('created_at', 'asc')
@@ -76,6 +83,16 @@ class AntennaStatus extends Command
             ->where('notifications.id', $notification->id)
             ->select('notifications.id', 'notifications.Message', 'notifications.Read')
             ->first();
+
+
+        foreach ($users as $user) {
+            /* EMAIL NOTIFICATION */
+            Mail::raw($message, function ($mail) use ($user) {
+                $mail->from('mantenimiento@assettracker.com');
+                $mail->to($user->email)
+                    ->subject('Notificacion de Antena Averiada');
+            });
+        }
 
         broadcast(new MapAntennaUpdate($locationNotification));
 

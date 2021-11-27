@@ -9,6 +9,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\CoordinateController;
 use App\Http\Controllers\LiveFeedController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\NotificationsController;
 use App\Events\LiveFeedUpdate;
 
 /*
@@ -31,6 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('antennas', AntennaController::class);
+Route::resource('notifications', NotificationsController::class);
 Route::resource('users', UserController::class);
 Route::resource('vehicles', VehicleController::class);
 Route::resource('tags', TagController::class);

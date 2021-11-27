@@ -49,21 +49,22 @@ class EmailNotification extends Command
 
         $users = AppUser::all();
 
-        /*
+
         $maintenanceData = [
             'body' => 'Recibiste una notificacion de mantenimiento',
             'maintenanceText' => 'Recuerde hacer su mantenimiento de rutina, reemplace la batería de su rastreador para evitar interrupciones en su servicio.',
             'thankyou' => 'Tienes 30 dias para hacer tu mantenimiento, de lo contrario no nos hacemos responsables por la interrupccion de su servicio'
         ];
-        */
+
 
         foreach ($users as $user) {
 
-            Mail::raw($message, function ($mail) use ($user) {
+            /*Mail::raw($message, function ($mail) use ($user) {
                 $mail->from('mantenimiento@assettracker.com');
                 $mail->to($user->Email)
                     ->subject('Recordatorio de Mantenimiento');
-            });
+            });*/
+            Mail::to($user)->send(new MaintenanceEmail($maintenanceData));
         }
 
         $this->info('Successfully sent maintenance email to users.');

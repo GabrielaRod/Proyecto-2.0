@@ -58,4 +58,8 @@ Route::get('/mapAntenna', function () {
     return view('antennas.map');
 })->name('antennas.map');
 
+Route::get('/adminReports', function () {
+    return view('reports.admin');
+})->name('reports.admin');
+
 Route::get('/live/data', [LiveFeedController::class, 'data']);

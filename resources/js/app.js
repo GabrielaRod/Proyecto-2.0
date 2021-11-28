@@ -2,6 +2,8 @@ require('./bootstrap');
 
 import Alpine from 'alpinejs';
 import * as VueGoogleMaps from 'vue2-google-maps';
+import VueGoodTablePlugin from 'vue-good-table';
+import 'vue-good-table/dist/vue-good-table.css'
 
 
 window.Alpine = Alpine;
@@ -15,8 +17,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('map-component', require('./components/MapComponent.vue').default);
 Vue.component('livedata-component', require('./components/LivedataComponent.vue').default);
 Vue.component('antenna-component', require('./components/AntennaComponent.vue').default);
+Vue.component('report-component', require('./components/ReportComponent.vue').default);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
+Vue.use(VueGoodTablePlugin);
 
 Vue.use(VueGoogleMaps, {
     load: {

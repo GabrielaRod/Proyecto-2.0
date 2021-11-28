@@ -18,19 +18,6 @@
             clip-rule="evenodd"
           />
         </svg>
-        <!-- <gmap-marker
-        v-for="d in data"
-        :key="d.id"
-        :position="{ lat: d.latitude, lng: d.longitude }"
-        :draggable="false"
-        :icon="d.status == 'INACTIVE' ? svgMarkerRed : svgMarkerGreen"
-      >
-         <GmapInfoWindow>
-          <div>
-            <strong>Estatus:{{ d.status }}</strong>
-          </div>
-        </GmapInfoWindow>
-      </gmap-marker> -->
       </gmap-custom-marker>
     </gmap-map>
   </div>

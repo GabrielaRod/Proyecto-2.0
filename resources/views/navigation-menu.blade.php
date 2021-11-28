@@ -20,7 +20,7 @@
                     <!-- Live Feed of the Antennas Scanning -->
                     <x-jet-nav-link href="{{ route('livefeed.index') }}"
                         :active="request()->routeIs('livefeed.index')">
-                        {{ __('Data en Vivo') }}
+                        {{ __('Transmisión') }}
                     </x-jet-nav-link>
 
                     <!-- Antennas -->
@@ -29,7 +29,7 @@
                             <x-slot name="trigger">
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 transition ease-in-out duration-150">
                                         {{ __('Antenas') }}
                                     </button>
                                 </span>
@@ -63,10 +63,27 @@
                     </x-jet-nav-link>
 
                     <!-- Reports -->
-                    <x-jet-nav-link href="{{ route('reports.index') }}"
-                        :active="request()->routeIs('reports.index')">
-                        {{ __('Reportes') }}
-                    </x-jet-nav-link>
+                    <div class="ml-3  mt-4 relative">
+                        <x-jet-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <span class="inline-flex rounded-md">
+                                    <button type="button"
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                        {{ __('Reportes') }}
+                                    </button>
+                                </span>
+                                <x-slot name="content">
+                                    <x-jet-dropdown-link href="{{ route('reports.index') }}">
+                                        {{ __('Alertas') }}
+                                    </x-jet-dropdown-link>
+
+                                    <x-jet-dropdown-link href="{{ route('reports.admin') }}">
+                                        {{ __('Tablero') }}
+                                    </x-jet-dropdown-link>
+                                </x-slot>
+                            </x-slot>
+                        </x-jet-dropdown>
+                    </div>
                 </div>
             </div>
 
@@ -158,7 +175,7 @@
                             @foreach ($notifications as $notification)
                                 <div class="py-2">
                                     <a href="" class=" flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
-                                        <p class="text-gray-600 text-sm mx-2">
+                                        <p class="text-gray-600 visited:text-medium-gray-400 text-sm mx-2">
                                             <span class="font-bold" href="#">
                                                 {{ $notification->Message }}</span>
                                         </p>
@@ -256,31 +273,39 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
 
+            <!-- Live Feed of the Antennas Scanning -->
+            <x-jet-responsive-nav-link href="{{ route('livefeed.index') }}"
+                :active="request()->routeIs('livefeed.index')">
+                {{ __('Transmisión') }}
+            </x-jet-responsive-nav-link>
+
             <!-- Antennas -->
             <x-jet-responsive-nav-link href="{{ route('antennas.index') }}"
                 :active="request()->routeIs('antennas.index')">
-                Antennas
+                {{ __('Antenas') }}
             </x-jet-responsive-nav-link>
 
-            <!-- Users -->
+            <!-- Localización -->
+            <x-jet-responsive-nav-link href="{{ route('coordinates.index') }}"
+                :active="request()->routeIs('coordinates.index')">
+                {{ __('Localización') }}
+            </x-jet-responsive-nav-link>
+
+            <!-- Usuarios -->
             <x-jet-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
-                Vehicles
+                {{ __('Usuarios') }}
             </x-jet-responsive-nav-link>
 
             <!-- Vehicles -->
             <x-jet-responsive-nav-link href="{{ route('vehicles.index') }}"
                 :active="request()->routeIs('vehicles.index')">
-                Vehicles
-            </x-jet-responsive-nav-link>
-
-            <!-- Live Feed of the Antennas Scanning -->
-            <x-jet-responsive-nav-link :active="request()->routeIs('livefeed')" href="">
-                Live Feed
+                {{ __('Vehiculos') }}
             </x-jet-responsive-nav-link>
 
             <!-- Reports -->
-            <x-jet-responsive-nav-link :active="request()->routeIs('reports')" href="">
-                Reports
+            <x-jet-responsive-nav-link href="{{ route('reports.index') }}"
+                :active="request()->routeIs('reports.index')">
+                {{ __('Reportes') }}
             </x-jet-responsive-nav-link>
         </div>
 

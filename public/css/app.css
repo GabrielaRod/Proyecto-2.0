@@ -661,9 +661,6 @@ video {
 .col-span-6 {
 	grid-column: span 6 / span 6;
 }
-.float-right {
-	float: right;
-}
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
@@ -822,9 +819,6 @@ video {
 }
 .h-20 {
 	height: 5rem;
-}
-.h-screen {
-	height: 100vh;
 }
 .h-3 {
 	height: 0.75rem;
@@ -1400,6 +1394,9 @@ video {
 }
 .font-bold {
 	font-weight: 700;
+}
+.font-light {
+	font-weight: 300;
 }
 .uppercase {
 	text-transform: uppercase;

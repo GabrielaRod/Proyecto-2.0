@@ -127,10 +127,10 @@
                 @endif
 
                 {{-- Notifications --}}
-                <div class="flex justify-center h-screen">
+                <div class="hidden sm:flex sm:items-center sm:ml-3">
                     <div x-data="{ dropdownOpen: false }" class="relative my-32">
                         <button @click="dropdownOpen = !dropdownOpen"
-                            class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+                            class="relative z-10 rounded-md bg-white p-2 focus:outline-none">
                             <span class="relative inline-flex rounded-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                     viewBox="0 0 24 24" stroke="grey">
@@ -139,29 +139,32 @@
                                 </svg>
                                 <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
                                     <span
-                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-800 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-800"></span>
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75">
+                                    </span>
+                                    <span class="object-right-top inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+
                                 </span>
                         </button>
-
                         <div x-show="dropdownOpen" @click="dropdownOpen = false"
-                            class="fixed inset-0 h-full w-full z-10"></div>
-
+                            class="fixed inset-0 h-full w-full z-10">
+                        </div>
                         <div x-show="dropdownOpen"
                             class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20"
                             style="width:20rem; display:none">
-                            <div class="py-2">
-                                <?php $notifications = DB::select('select * from notifications'); ?>
-                                @foreach ($notifications as $notification)
-                                    <a href="{{ route('notifications.show', $notification->id) }}"
-                                        class=" flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
+                            <?php $notifications = DB::table('notifications')
+                                ->select('*')
+                                ->where('notifications.Read', 'false')
+                                ->get(); ?>
+                            @foreach ($notifications as $notification)
+                                <div class="py-2">
+                                    <a href="" class=" flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
                                         <p class="text-gray-600 text-sm mx-2">
                                             <span class="font-bold" href="#">
                                                 {{ $notification->Message }}</span>
                                         </p>
                                     </a>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                             <a href="{{ route('notifications.index') }}"
                                 class="block bg-gray-800 text-white text-center font-bold py-2">See all
                                 notifications</a>

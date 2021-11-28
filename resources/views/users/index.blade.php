@@ -48,49 +48,51 @@
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     @foreach ($users as $user)
-                                    <tr>
-                                        <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
-                                            {{ $user->id }}
-                                        </td>
+                                        <tr>
+                                            <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
+                                                {{ $user->id }}
+                                            </td>
 
-                                        <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
-                                            <span
-                                                class="inline-flex px-2 font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full text-s">
-                                                {{ $user->name }}
-                                            </span>
-                                        </td>
+                                            <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
+                                                <span
+                                                    class="inline-flex px-2 font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full text-s">
+                                                    {{ $user->name }}
+                                                </span>
+                                            </td>
 
-                                        <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
-                                            {{ $user->email }}
-                                        </td>
+                                            <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
+                                                {{ $user->email }}
+                                            </td>
 
-                                        <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
-                                            {{ $user->email_verified_at }}
-                                        </td>
+                                            <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
+                                                {{ $user->email_verified_at }}
+                                            </td>
 
-                                        <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
-                                            @foreach ($user->roles as $role)
-                                            <span
-                                                class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                                {{ $role->title }}
-                                            </span>
-                                            @endforeach
-                                        </td>
+                                            <td class="px-6 py-4 text-sm text-center text-gray-900 whitespace-nowrap">
+                                                @foreach ($user->roles as $role)
+                                                    <span
+                                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                                        {{ $role->title }}
+                                                    </span>
+                                                @endforeach
+                                            </td>
 
-                                        <td class="px-6 py-4 text-sm font-medium text-center whitespace-nowrap">
-                                            <a href="{{ route('users.show', $user->id) }}"
-                                                class="mb-2 mr-2 text-blue-600 hover:text-blue-900">Ver</a>
-                                            <a href="{{ route('users.edit', $user->id) }}"
-                                                class="mb-2 mr-2 text-indigo-600 hover:text-indigo-900">Editar</a>
-                                            <form class="inline-block" action="{{ route('users.destroy', $user->id) }}"
-                                                method="POST" onsubmit="return confirm('Estás seguro?');">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <input type="submit" class="mb-2 mr-2 text-red-600 hover:text-red-900"
-                                                    value="Delete">
-                                            </form>
-                                        </td>
-                                    </tr>
+                                            <td class="px-6 py-4 text-sm font-medium text-center whitespace-nowrap">
+                                                <a href="{{ route('users.show', $user->id) }}"
+                                                    class="mb-2 mr-2 text-blue-600 hover:text-blue-900">Ver</a>
+                                                <a href="{{ route('users.edit', $user->id) }}"
+                                                    class="mb-2 mr-2 text-indigo-600 hover:text-indigo-900">Editar</a>
+                                                <form class="inline-block"
+                                                    action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                                    onsubmit="return confirm('Estás seguro?');">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="submit"
+                                                        class="mb-2 mr-2 text-red-600 hover:text-red-900"
+                                                        value="Delete">
+                                                </form>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

@@ -53,6 +53,7 @@ Route::resource('users', UserController::class);*/
 Route::get('/map', [LiveFeedController::class, 'dataLocation']);
 Route::get('/live', [PageController::class, 'livedata']);
 Route::get('/antennasmap', [PageController::class, 'mapAntenna']);
+Route::get('/alertsReport', [ReportsController::class, 'index']);
 
 Route::get('/mapAntenna', function () {
     return view('antennas.map');
@@ -61,5 +62,6 @@ Route::get('/mapAntenna', function () {
 Route::get('/adminReports', function () {
     return view('reports.admin');
 })->name('reports.admin');
+
 
 Route::get('/live/data', [LiveFeedController::class, 'data']);

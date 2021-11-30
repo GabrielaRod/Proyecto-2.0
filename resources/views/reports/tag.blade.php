@@ -8,7 +8,7 @@
         <div class="max-w-6xl py-10 mx-auto sm:px-6 lg:px-8">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
-                    <report-component></report-component>
+                    <tag-report-component></tag-report-component>
                 </div>
             </div>
         </div>

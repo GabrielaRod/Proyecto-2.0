@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "report-component",
+  name: "tag-report-component",
   data() {
     return {
       columns: [
@@ -26,13 +26,43 @@ export default {
           field: "id",
         },
         {
-          label: "Tag",
-          field: "Tag",
+          label: "VIN",
+          field: "VIN",
           type: "string",
         },
         {
           label: "Placa",
           field: "LicensePlate",
+          type: "string",
+        },
+           {
+          label: "Marca",
+          field: "Make",
+          type: "string",
+        },
+        {
+          label: "Modelo",
+          field: "Model",
+          type: "string",
+        },
+         {
+          label: "Color",
+          field: "Color",
+          type: "string",
+        },
+           {
+          label: "Nombre",
+          field: "FirstName",
+          type: "string",
+        },
+        {
+          label: "Apellido",
+          field: "LastName",
+          type: "string",
+        },
+        {
+          label: "Estatus",
+          field: "Status",
           type: "string",
         },
         {
@@ -50,28 +80,19 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const { data } = await axios.get("tagReport");
+        const { data } = await axios.get("alertReport");
         console.log(data);
         data.forEach((element) => {
           this.rows.push(element);
         });
       } catch {
-        console.log("error fetching tagReport");
+        console.log("error fetching alertReport");
       }
     },
   },
 
   async created() {
         await this.fetchData();
-        //  Echo.private("MapLocationChannel").listen("LiveFeedUpdate", e => {
-        //     console.log(e);
-        //     this.notifications.push({
-        //         id: e.id,
-        //         Message: e.Message ? e.Message : null,
-        //         Read: e.Read
-
-        //     });
-        // });
     }
 };
 </script>

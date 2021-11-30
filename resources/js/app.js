@@ -17,10 +17,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('map-component', require('./components/MapComponent.vue').default);
 Vue.component('livedata-component', require('./components/LivedataComponent.vue').default);
 Vue.component('antenna-component', require('./components/AntennaComponent.vue').default);
-Vue.component('report-component', require('./components/ReportComponent.vue').default);
+Vue.component('tag-report-component', require('./components/TagReportComponent.vue').default);
+Vue.component('alert-report-component', require('./components/AlertReportComponent.vue').default);
 Vue.component('notification-component', require('./components/NotificationComponent.vue').default);
 
-Vue.config.ignoredElements = ['pepe'];
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 

@@ -60,8 +60,12 @@ Route::get('/mapAntenna', function () {
 })->name('antennas.map');
 
 Route::get('/adminReports', function () {
-    return view('reports.admin');
-})->name('reports.admin');
+    return view('reports.tag');
+})->name('reports.tag');
+
+Route::get('/alertReports', function () {
+    return view('reports.alert');
+})->name('reports.alert');
 
 Route::get('/live/data', [LiveFeedController::class, 'data']);
 
@@ -70,3 +74,5 @@ Route::get('/unreadNotifications', [NotificationsController::class, 'unreadNotif
 Route::post('/updateNotifications', [NotificationsController::class, 'updateNotifications']);
 
 Route::get('/tagReport', [TagController::class, 'tagReport']);
+
+Route::get('/alertReport', [ReportsController::class, 'alertReport']);

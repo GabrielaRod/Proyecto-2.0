@@ -8,7 +8,7 @@ use stdClass;
 
 class ReportsController extends Controller
 {
-    public function index()
+    public function alertReport()
     {
         /*The antenas that show in the Map are only the ones that are ACTIVE*/
         $reports = collect();
@@ -16,8 +16,7 @@ class ReportsController extends Controller
         /* TODO: PROBAR CON LA TABLA LOCATIONS PARA SOLO PRESENTAR ALGUN VIN QUE TENGA COMO STATUS ACTIVO EN TABLA REPORTS */
 
         $data = DB::table('reports')
-            ->select('reports.id', 'reports.VIN', 'reports.LicensePlate', 'reports.Make', 'reports.Model', 'reports.Color', 'reports.FirstName', 'reports.LastName', 'reports.Status')
-            ->where('reports.Status', 'ACTIVE')
+            ->select('reports.id', 'reports.VIN', 'reports.LicensePlate', 'reports.Make', 'reports.Model', 'reports.Color', 'reports.FirstName', 'reports.LastName', 'reports.Status', 'reports.created_at')
             ->get();
 
         foreach ($data as $d) {
@@ -35,7 +34,7 @@ class ReportsController extends Controller
         }
 
 
-        //return $reports;
-        return view('reports.index', compact('reports'));
+        return $data;
+        //return view('reports.index', compact('reports'));
     }
 }

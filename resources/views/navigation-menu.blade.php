@@ -73,19 +73,19 @@
                                     </button>
                                 </span>
                                 <x-slot name="content">
-                                    <x-jet-dropdown-link href="{{ route('reports.index') }}">
+                                    <x-jet-dropdown-link href="{{ route('reports.alert') }}">
                                         {{ __('Alertas') }}
                                     </x-jet-dropdown-link>
 
-                                    <x-jet-dropdown-link href="{{ route('reports.admin') }}">
+                                    <x-jet-dropdown-link href="{{ route('reports.tag') }}">
                                         {{ __('Tags') }}
                                     </x-jet-dropdown-link>
 
-                                    <x-jet-dropdown-link href="{{ route('reports.index') }}">
+                                    <x-jet-dropdown-link href="{{ route('reports.alert') }}">
                                         {{ __('Transmisión') }}
                                     </x-jet-dropdown-link>
 
-                                    <x-jet-dropdown-link href="{{ route('reports.admin') }}">
+                                    <x-jet-dropdown-link href="{{ route('reports.tag') }}">
                                         {{ __('Usuarios Moviles') }}
                                     </x-jet-dropdown-link>
                                 </x-slot>

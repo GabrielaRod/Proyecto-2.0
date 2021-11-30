@@ -2,7 +2,7 @@
   <div>
     <vue-good-table
       :columns="columns"
-      :rows="rows"
+      :rows="dataFiltered"
       :search-options="{
         enabled: true,
       }"
@@ -57,11 +57,11 @@ export default {
             return this.rows
                 .sort((a, b) => b.id - a.id)
                 .map(x => {
-                    const kk = x.rows
-                        ? JSON.parse(x.rows.replaceAll("'", '"'))
-                        : x.rows;
+                    const kk = x.data
+                        ? JSON.parse(x.data.replaceAll("'", '"'))
+                        : x.data;
                     return {
-                        data: x.data.macAddress,
+                        data: kk.macAddress,
                         id: x.id,
                         location: x.location
                     };

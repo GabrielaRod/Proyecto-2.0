@@ -36,7 +36,7 @@ export default {
           type: "string",
         },
         {
-          label: "Direccion",
+          label: "Dirección",
           field: "Address",
           type: "string",
         },
@@ -46,7 +46,7 @@ export default {
           type: "string",
         },
         {
-          label: "Telefono",
+          label: "Teléfono",
           field: "PhoneNumber",
           type: "number",
         },

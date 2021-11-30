@@ -25,3 +25,6 @@ Broadcast::channel('LocationChannel', function () {
     return true;
 });
 
+Broadcast::channel('MapLocationChannel', function () {
+    return true;
+});

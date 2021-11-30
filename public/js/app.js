@@ -5371,7 +5371,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         field: "LastName",
         type: "string"
       }, {
-        label: "Direccion",
+        label: "Dirección",
         field: "Address",
         type: "string"
       }, {
@@ -5379,7 +5379,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         field: "City",
         type: "string"
       }, {
-        label: "Telefono",
+        label: "Teléfono",
         field: "PhoneNumber",
         type: "number"
       }, {
@@ -5728,9 +5728,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.rows.sort(function (a, b) {
         return b.id - a.id;
       }).map(function (x) {
-        var kk = x.rows ? JSON.parse(x.rows.replaceAll("'", '"')) : x.rows;
+        var kk = x.data ? JSON.parse(x.data.replaceAll("'", '"')) : x.data;
         return {
-          data: x.data.macAddress,
+          data: kk.macAddress,
           id: x.id,
           location: x.location
         };
@@ -6128,6 +6128,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this3.fetchData();
 
             case 2:
+              Echo["private"]("MapLocationChannel").listen("MapAntennaUpdate", function (e) {
+                console.log(e);
+
+                _this3.notifications.push({
+                  id: e.id,
+                  Message: e.Message ? e.Message : null,
+                  Read: e.Read
+                });
+              });
+
+            case 3:
             case "end":
               return _context3.stop();
           }
@@ -43563,7 +43574,7 @@ var render = function() {
       _c("vue-good-table", {
         attrs: {
           columns: _vm.columns,
-          rows: _vm.rows,
+          rows: _vm.dataFiltered,
           "search-options": {
             enabled: true
           },

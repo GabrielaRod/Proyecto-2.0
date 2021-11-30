@@ -52,7 +52,6 @@ class VehicleController extends Controller
         $vehicle->load('app_users');
 
         return view('vehicles.edit', compact('vehicle', 'app_users'));
-
     }
 
     public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
@@ -62,5 +61,4 @@ class VehicleController extends Controller
 
         return redirect()->route('vehicles.index');
     }
-
 }

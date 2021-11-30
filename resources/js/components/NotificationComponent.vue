@@ -76,15 +76,15 @@ export default {
 
   async created() {
         await this.fetchData();
-        //  Echo.private("MapLocationChannel").listen("LiveFeedUpdate", e => {
-        //     console.log(e);
-        //     this.notifications.push({
-        //         id: e.id,
-        //         Message: e.Message ? e.Message : null,
-        //         Read: e.Read
+         Echo.private("MapLocationChannel").listen("MapAntennaUpdate", e => {
+            console.log(e);
+            this.notifications.push({
+                id: e.id,
+                Message: e.Message ? e.Message : null,
+                Read: e.Read
 
-        //     });
-        // });
+            });
+        });
     }
 };
 </script>

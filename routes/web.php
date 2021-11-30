@@ -10,6 +10,7 @@ use App\Http\Controllers\CoordinateController;
 use App\Http\Controllers\LiveFeedController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\AppUserController;
 use App\Events\LiveFeedUpdate;
 
 /*
@@ -39,6 +40,7 @@ Route::resource('tags', TagController::class);
 Route::resource('coordinates', CoordinateController::class);
 Route::resource('livefeed', LiveFeedController::class);
 Route::resource('reports', ReportsController::class);
+Route::resource('appusers', AppUserController::class);
 
 /*
 Route::resource('antennas', AntennaController::class);
@@ -67,6 +69,14 @@ Route::get('/alertReports', function () {
     return view('reports.alert');
 })->name('reports.alert');
 
+Route::get('/liveReports', function () {
+    return view('reports.live');
+})->name('reports.live');
+
+Route::get('/appusersReports', function () {
+    return view('reports.appuser');
+})->name('reports.appuser');
+
 Route::get('/live/data', [LiveFeedController::class, 'data']);
 
 Route::get('/unreadNotifications', [NotificationsController::class, 'unreadNotifications']);
@@ -76,3 +86,5 @@ Route::post('/updateNotifications', [NotificationsController::class, 'updateNoti
 Route::get('/tagReport', [TagController::class, 'tagReport']);
 
 Route::get('/alertReport', [ReportsController::class, 'alertReport']);
+
+Route::get('/appuserReport', [AppUserController::class, 'appuserReport']);

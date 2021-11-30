@@ -19,6 +19,8 @@ Vue.component('livedata-component', require('./components/LivedataComponent.vue'
 Vue.component('antenna-component', require('./components/AntennaComponent.vue').default);
 Vue.component('tag-report-component', require('./components/TagReportComponent.vue').default);
 Vue.component('alert-report-component', require('./components/AlertReportComponent.vue').default);
+Vue.component('live-report-component', require('./components/LivefeedReportComponent.vue').default);
+Vue.component('appuser-report-component', require('./components/AppUserReportComponent.vue').default);
 Vue.component('notification-component', require('./components/NotificationComponent.vue').default);
 
 // const files = require.context('./', true, /\.vue$/i)

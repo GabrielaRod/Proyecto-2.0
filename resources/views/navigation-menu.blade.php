@@ -81,11 +81,11 @@
                                         {{ __('Tags') }}
                                     </x-jet-dropdown-link>
 
-                                    <x-jet-dropdown-link href="{{ route('reports.alert') }}">
+                                    <x-jet-dropdown-link href="{{ route('reports.live') }}">
                                         {{ __('Transmisión') }}
                                     </x-jet-dropdown-link>
 
-                                    <x-jet-dropdown-link href="{{ route('reports.tag') }}">
+                                    <x-jet-dropdown-link href="{{ route('reports.appuser') }}">
                                         {{ __('Usuarios Moviles') }}
                                     </x-jet-dropdown-link>
                                 </x-slot>

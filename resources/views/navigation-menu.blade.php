@@ -80,6 +80,14 @@
                                     <x-jet-dropdown-link href="{{ route('reports.admin') }}">
                                         {{ __('Tags') }}
                                     </x-jet-dropdown-link>
+
+                                    <x-jet-dropdown-link href="{{ route('reports.index') }}">
+                                        {{ __('Transmisión') }}
+                                    </x-jet-dropdown-link>
+
+                                    <x-jet-dropdown-link href="{{ route('reports.admin') }}">
+                                        {{ __('Usuarios Moviles') }}
+                                    </x-jet-dropdown-link>
                                 </x-slot>
                             </x-slot>
                         </x-jet-dropdown>
@@ -143,51 +151,6 @@
                     </div>
                 @endif
 
-                {{-- Notifications --}}
-                <div class="hidden sm:flex sm:items-center sm:ml-3">
-                    <div x-data="{ dropdownOpen: false }" class="relative my-32">
-                        <button @click="dropdownOpen = !dropdownOpen"
-                            class="relative z-10 rounded-md bg-white p-2 focus:outline-none">
-                            <span class="relative inline-flex rounded-md">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                    viewBox="0 0 24 24" stroke="gray">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                                </svg>
-                                <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
-                                    <span
-                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75">
-                                    </span>
-                                    <span class="object-right-top inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
-
-                                </span>
-                        </button>
-                        <div x-show="dropdownOpen" @click="dropdownOpen = false"
-                            class="fixed inset-0 h-full w-full z-10">
-                        </div>
-                        <div x-show="dropdownOpen"
-                            class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20"
-                            style="width:20rem; display:none">
-                            <?php $notifications = DB::table('notifications')
-                                ->select('*')
-                                ->where('notifications.Read', 'false')
-                                ->get(); ?>
-                            @foreach ($notifications as $notification)
-                                <div class="py-2">
-                                    <a href="" class=" flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
-                                        <p class="text-gray-600 visited:text-medium-gray-400 text-sm mx-2">
-                                            <span class="font-bold" href="#">
-                                                {{ $notification->Message }}</span>
-                                        </p>
-                                    </a>
-                                </div>
-                            @endforeach
-                            <a href="{{ route('notifications.index') }}"
-                                class="block bg-gray-800 text-white text-center font-bold py-2">See all
-                                notifications</a>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
@@ -249,15 +212,20 @@
                 </div>
             </div>
 
+            {{-- Notifications --}}
+            <div class="hidden sm:flex sm:items-center sm:ml-3" id="app2">
+                <notification-component seeallurl="{{ route('notifications.index') }}"></notification-component>
+            </div>
+
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
-                <button @click="open = ! open"
+                <button x-on:click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
+                        <path x-bind:class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden"
+                        <path x-bind:class="{'hidden': ! open, 'inline-flex': open }" class="hidden"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
@@ -265,8 +233,9 @@
         </div>
     </div>
 
+
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div x-bind:class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <!-- Dashboard -->
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">

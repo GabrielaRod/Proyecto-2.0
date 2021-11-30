@@ -18,6 +18,9 @@ Vue.component('map-component', require('./components/MapComponent.vue').default)
 Vue.component('livedata-component', require('./components/LivedataComponent.vue').default);
 Vue.component('antenna-component', require('./components/AntennaComponent.vue').default);
 Vue.component('report-component', require('./components/ReportComponent.vue').default);
+Vue.component('notification-component', require('./components/NotificationComponent.vue').default);
+
+Vue.config.ignoredElements = ['pepe'];
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
@@ -33,7 +36,11 @@ Vue.use(VueGoogleMaps, {
 
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+});
+
+const app2 = new Vue({
+    el: '#app2',
 });
 
 // const app = new Vue({

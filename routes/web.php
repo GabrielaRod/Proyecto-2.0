@@ -63,5 +63,8 @@ Route::get('/adminReports', function () {
     return view('reports.admin');
 })->name('reports.admin');
 
-
 Route::get('/live/data', [LiveFeedController::class, 'data']);
+
+Route::get('/unreadNotifications', [NotificationsController::class, 'unreadNotifications']);
+
+Route::post('/updateNotifications', [NotificationsController::class, 'updateNotifications']);

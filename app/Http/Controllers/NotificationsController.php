@@ -35,11 +35,32 @@ class NotificationsController extends Controller
         }
     }
 
-    public function update(UpdateNotificationRequest $request, Notification $notification)
-    {
-        $notification->update($request->validated());
-        $notification->sync($request->update($notification->Read = true));
+    public function updateNotifications(Request $request)
+    {  
+        //dd($request[]);
 
-        return redirect()->route('notifications.index');
+       foreach ($request->notifications as $notification) {
+
+            
+
+            DB::table('notifications')
+            ->where('id', $notification["id"])
+            ->update(['Read' => 1]);
+
+        }
+
+        //return $request;
+        
+    }
+
+    public function unreadNotifications(){
+
+        $notifications = DB::table('notifications')
+            ->where('Read', false)
+            ->orderBy('id', 'desc')
+            ->take(5)
+            ->get();
+
+            return $notifications;
     }
 }

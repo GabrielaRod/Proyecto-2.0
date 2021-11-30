@@ -17,7 +17,7 @@
                                 </span>
                               </span>
                         </button>
-                        <div v-show="dropdownOpen" @click="update"
+                        <div v-show="dropdownOpen" @click="dropdownOpen = false"
                             class="fixed inset-0 h-full w-full z-10">
                         </div>
                         <div v-show="dropdownOpen"
@@ -76,16 +76,15 @@ export default {
 
   async created() {
         await this.fetchData();
-        /* Echo.private("MapLocationChannel").listen("LiveFeedUpdate", e => {
-            console.log("listening cosa");
-            console.log(e);
-            this.notifications.push({
-                id: e.id,
-                Message: e.data ? e.data : null,
-                Read: e.location
+        //  Echo.private("MapLocationChannel").listen("LiveFeedUpdate", e => {
+        //     console.log(e);
+        //     this.notifications.push({
+        //         id: e.id,
+        //         Message: e.Message ? e.Message : null,
+        //         Read: e.Read
 
-            });
-        }); */
+        //     });
+        // });
     }
 };
 </script>

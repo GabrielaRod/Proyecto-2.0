@@ -19,12 +19,22 @@ class TagController extends Controller
 
         return view('tags.index', compact('tags'));
     }
-    
+
 
 
     public function show(Tag $tag)
     {
 
         return view('tags.show', compact('tags'));
+    }
+
+    public function tagReport()
+    {
+        $tags = DB::table('tags')
+            ->join('vehicles', 'vehicles.id', '=', 'tags.vehicle_id')
+            ->select('tags.id', 'tags.Tag', 'vehicles.LicensePlate', 'tags.created_at')
+            ->get();
+
+        return $tags;
     }
 }

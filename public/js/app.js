@@ -5759,64 +5759,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "my-component",
+  name: "report-component",
   data: function data() {
     return {
       columns: [{
-        label: "Name",
-        field: "name"
+        label: "ID",
+        field: "id"
       }, {
-        label: "Age",
-        field: "age",
-        type: "number"
+        label: "Tag",
+        field: "Tag",
+        type: "string"
+      }, {
+        label: "Placa",
+        field: "LicensePlate",
+        type: "string"
       }, {
         label: "Created On",
-        field: "createdAt",
+        field: "created_at",
         type: "date",
-        dateInputFormat: "yyyy-MM-dd",
+        dateInputFormat: "yyyy-MM-dd HH:mm:ss",
         dateOutputFormat: "MMM do yy"
-      }, {
-        label: "Percent",
-        field: "score",
-        type: "percentage"
       }],
-      rows: [{
-        id: 1,
-        name: "John",
-        age: 20,
-        createdAt: "",
-        score: 0.03343
-      }, {
-        id: 2,
-        name: "Jane",
-        age: 24,
-        createdAt: "2011-10-31",
-        score: 0.03343
-      }, {
-        id: 3,
-        name: "Susan",
-        age: 16,
-        createdAt: "2011-10-30",
-        score: 0.03343
-      }, {
-        id: 4,
-        name: "Chris",
-        age: 55,
-        createdAt: "2011-10-11",
-        score: 0.03343
-      }, {
-        id: 5,
-        name: "Dan",
-        age: 40,
-        createdAt: "2011-10-21",
-        score: 0.03343
-      }, {
-        id: 6,
-        name: "John",
-        age: 20,
-        createdAt: "2011-10-31",
-        score: 0.03343
-      }]
+      rows: []
     };
   },
   methods: {
@@ -5832,14 +5796,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios.get("antennasmap");
+                return axios.get("tagReport");
 
               case 3:
                 _yield$axios$get = _context.sent;
                 data = _yield$axios$get.data;
                 console.log(data);
                 data.forEach(function (element) {
-                  _this.data.push(element);
+                  _this.rows.push(element);
                 });
                 _context.next = 12;
                 break;
@@ -5847,7 +5811,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 9:
                 _context.prev = 9;
                 _context.t0 = _context["catch"](0);
-                console.log("error fetching antennasmap");
+                console.log("error fetching tagReport");
 
               case 12:
               case "end":
@@ -5857,6 +5821,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, null, [[0, 9]]);
       }))();
     }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _this2.fetchData();
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   }
 });
 
@@ -42990,7 +42973,11 @@ var render = function() {
         }
       ],
       staticClass: "fixed inset-0 h-full w-full z-10",
-      on: { click: _vm.update }
+      on: {
+        click: function($event) {
+          _vm.dropdownOpen = false
+        }
+      }
     }),
     _vm._v(" "),
     _c(
